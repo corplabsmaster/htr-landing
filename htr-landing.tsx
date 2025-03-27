@@ -79,7 +79,7 @@ export default function FarmAppLanding() {
                     be more profitable and sustainable
                   </h1>
                   <p className="max-w-[600px] text-gray-700 dark:text-gray-300 md:text-xl">
-                    The Hiterra* Agro AI platform consists of the Hiterra app,
+                    The Hiterra Agro AI platform consists of the Hiterra app,
                     the Hiterra Dashboard Web, and the Hiterra AI Data platform
                   </p>
                 </div>
@@ -209,8 +209,8 @@ export default function FarmAppLanding() {
                   Cutting-Edge Technology
                 </h3>
                 <p>
-                  We use the latest tools and technology to stay ahead, ensuring
-                  efficient and effective services.
+                  We use the latest tools and AI technology to stay ahead,
+                  ensuring efficient and effective services.
                 </p>
               </div>
               <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
@@ -236,22 +236,22 @@ export default function FarmAppLanding() {
         <section className="py-12 md:py-24 lg:py-32 bg-blue-600 text-white dark:bg-blue-800">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-              <div className="space-y-4">
+              <div className="space-y-4 text-center lg:text-left">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                   Ready to Transform Your Farm?
                 </h2>
-                <p className="max-w-[600px] text-blue-50 md:text-xl">
+                <p className="max-w-[600px] text-blue-50 md:text-xl mx-auto lg:mx-0">
                   Join thousands of farmers who are already using our platform
                   to optimize their operations and increase profitability.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center lg:justify-end">
-                <Button className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac]">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
+                <Button className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac] px-8 py-6 h-auto font-medium text-base">
                   Start Free Trial
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-blue-700 dark:hover:bg-blue-900"
+                  className="border-white border-2 bg-blue-700 text-white px-8 py-6 h-auto font-medium text-base hover:bg-blue-800 hover:text-white focus:text-white active:text-white dark:bg-blue-900 dark:hover:bg-blue-950"
                 >
                   Schedule Demo
                 </Button>
@@ -262,8 +262,9 @@ export default function FarmAppLanding() {
       </main>
       <footer className="border-t bg-white dark:bg-gray-900 dark:border-gray-800">
         <div className="container flex flex-col gap-6 py-8 md:py-12 px-4 md:px-6">
-          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-            <div className="space-y-3">
+          <div className="grid grid-cols-12 gap-8">
+            {/* Logo section - takes 3 columns */}
+            <div className="col-span-12 md:col-span-3 space-y-3">
               <div className="flex items-center gap-2">
                 <Image
                   src={
@@ -271,127 +272,139 @@ export default function FarmAppLanding() {
                       ? "/logos/htrr-logo-horizonta-negative.svg"
                       : "/logos/htr-logo-horizonta-positive.svg"
                   }
-                  alt="Terra Logo"
+                  alt="hiterra Logo"
                   width={120}
                   height={24}
                   className="h-8 w-auto"
                 />
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Smart farming solutions for modern agriculture. Streamline
+                Smart farming AI solutions for modern agriculture. Streamline
                 operations and increase yields.
               </p>
             </div>
-            <div className="space-y-3">
-              <h3 className="font-bold dark:text-white">Platform</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Mobile App
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    AI Data Platform
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Marketplace
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h3 className="font-bold dark:text-white">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Press
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h3 className="font-bold dark:text-white">Support</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Community
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Status
-                  </Link>
-                </li>
-              </ul>
+
+            {/* Gap - takes 1 column */}
+            <div className="hidden md:block md:col-span-1"></div>
+
+            {/* Navigation group - takes 8 columns, divided into 3 sections */}
+            <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Platform section */}
+              <div className="space-y-3">
+                <h3 className="font-bold dark:text-white text-lg">Platform</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Mobile App
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      AI Data Platform
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Marketplace
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Company section */}
+              <div className="space-y-3">
+                <h3 className="font-bold dark:text-white text-lg">Company</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Careers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Press
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Support section */}
+              <div className="space-y-3">
+                <h3 className="font-bold dark:text-white text-lg">Support</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Help Center
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Community
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="#"
+                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    >
+                      Status
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row justify-between items-center border-t pt-6 dark:border-gray-800">
