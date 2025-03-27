@@ -79,7 +79,7 @@ export default function FarmAppLanding() {
                     be more profitable and sustainable
                   </h1>
                   <p className="max-w-[600px] text-gray-700 dark:text-gray-300 md:text-xl">
-                    The Hiterra Agro AI platform consists of the Hiterra app,
+                    The Hiterra* Agro AI platform consists of the Hiterra app,
                     the Hiterra Dashboard Web, and the Hiterra AI Data platform
                   </p>
                 </div>
