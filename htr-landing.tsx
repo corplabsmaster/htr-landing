@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import Image from "next/image"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { useTheme } from "next-themes"
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function FarmAppLanding() {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-950">
@@ -17,7 +17,9 @@ export default function FarmAppLanding() {
           <div className="flex items-center gap-2">
             <Image
               src={
-                theme === "dark" ? "/logos/htrr-logo-horizonta-negative.svg" : "/logos/htr-logo-horizonta-positive.svg"
+                theme === "dark"
+                  ? "/logos/htrr-logo-horizonta-negative.svg"
+                  : "/logos/htr-logo-horizonta-positive.svg"
               }
               alt="Terra Logo"
               width={120}
@@ -73,11 +75,12 @@ export default function FarmAppLanding() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac] sm:text-5xl xl:text-6xl/none">
-                    A Platform that helps farmers and agricultural companies to be more profitable and sustainable
+                    A Platform that helps farmers and agricultural companies to
+                    be more profitable and sustainable
                   </h1>
                   <p className="max-w-[600px] text-gray-700 dark:text-gray-300 md:text-xl">
-                    The Hiterra Agro AI platform consists of the Hiterra app, the Hiterra Dashboard Web, and the Hiterra
-                    AI Data platform
+                    The Hiterra Agro AI platform consists of the Hiterra app,
+                    the Hiterra Dashboard Web, and the Hiterra AI Data platform
                   </p>
                 </div>
                 <div className="w-full max-w-sm space-y-2">
@@ -96,7 +99,10 @@ export default function FarmAppLanding() {
                   </form>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Sign up to get notified when we launch.{" "}
-                    <Link href="/terms" className="underline underline-offset-2">
+                    <Link
+                      href="/terms"
+                      className="underline underline-offset-2"
+                    >
                       Terms &amp; Conditions
                     </Link>
                   </p>
@@ -106,7 +112,10 @@ export default function FarmAppLanding() {
           </div>
         </section>
 
-        <section id="problem" className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-gray-900">
+        <section
+          id="problem"
+          className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-gray-900"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
@@ -115,21 +124,37 @@ export default function FarmAppLanding() {
             </div>
             <div className="mx-auto max-w-4xl">
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
-                Farmers and agricultural companies face several challenges, including{" "}
-                <span className="underline">reliance on outdated practices</span>,{" "}
-                <span className="underline">the complexity of farm management tools</span>,{" "}
-                <span className="underline">difficulty in choosing cost-effective products</span>
+                Farmers and agricultural companies face several challenges,
+                including{" "}
+                <span className="underline">
+                  reliance on outdated practices
+                </span>
+                ,{" "}
+                <span className="underline">
+                  the complexity of farm management tools
+                </span>
+                ,{" "}
+                <span className="underline">
+                  difficulty in choosing cost-effective products
+                </span>
               </p>
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac]">
-                These issues result in <span className="underline">higher operational costs</span>,{" "}
-                <span className="underline">lower yields, and underutilized resources</span>, preventing farmers from
-                optimizing their agricultural processes and maximizing productivity.
+                These issues result in{" "}
+                <span className="underline">higher operational costs</span>,{" "}
+                <span className="underline">
+                  lower yields, and underutilized resources
+                </span>
+                , preventing farmers from optimizing their agricultural
+                processes and maximizing productivity.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="solution" className="py-12 md:py-24 lg:py-32 dark:bg-gray-950">
+        <section
+          id="solution"
+          className="py-12 md:py-24 lg:py-32 dark:bg-gray-950"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
@@ -138,23 +163,33 @@ export default function FarmAppLanding() {
             </div>
             <div className="mx-auto max-w-4xl">
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
-                Hiterra Argo addresses these challenges by providing an AI-powered platform that delivers{" "}
-                <span className="underline">smart farming recommendations</span>,{" "}
-                <span className="underline">automates agricultural cycles and tasks</span>
+                Hiterra Argo addresses these challenges by providing an
+                AI-powered platform that delivers{" "}
+                <span className="underline">smart farming recommendations</span>
+                ,{" "}
+                <span className="underline">
+                  automates agricultural cycles and tasks
+                </span>
               </p>
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
-                The platform offers a marketplace for products and services, as well as community forum for sharing
-                knowledge, enabling farmers to increase efficiency, reduce costs, and enhance overall productivity.
+                The platform offers a marketplace for products and services, as
+                well as community forum for sharing knowledge, enabling farmers
+                to increase efficiency, reduce costs, and enhance overall
+                productivity.
               </p>
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] font-bold">
-                By implementing Hiterra Agro System, farmer and agricultural companies are able to reduce more than 85%
-                labour and 70% time-saving.
+                By implementing Hiterra Agro System, farmer and agricultural
+                companies are able to reduce more than 85% labour and 70%
+                time-saving.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="why-us" className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-gray-900">
+        <section
+          id="why-us"
+          className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-gray-900"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
@@ -165,26 +200,33 @@ export default function FarmAppLanding() {
               <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Expert Team</h3>
                 <p>
-                  Our skilled team brings specialized knowledge and experience to provide top-notch solutions tailored
-                  to our clients' needs.
+                  Our skilled team brings specialized knowledge and experience
+                  to provide top-notch solutions tailored to our clients' needs.
                 </p>
               </div>
               <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">Cutting-Edge Technology</h3>
-                <p>We use the latest tools and technology to stay ahead, ensuring efficient and effective services.</p>
+                <h3 className="text-xl font-bold mb-4">
+                  Cutting-Edge Technology
+                </h3>
+                <p>
+                  We use the latest tools and technology to stay ahead, ensuring
+                  efficient and effective services.
+                </p>
               </div>
               <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Customer Focus</h3>
                 <p>
-                  We prioritize building strong relationships and understanding our clients' needs, leading to long-term
-                  partnerships based on trust and satisfaction.
+                  We prioritize building strong relationships and understanding
+                  our clients' needs, leading to long-term partnerships based on
+                  trust and satisfaction.
                 </p>
               </div>
               <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Proven Success</h3>
                 <p>
-                  With a track record of successful projects, we've earned a reputation for reliability and excellence,
-                  setting us apart from the competition.
+                  With a track record of successful projects, we've earned a
+                  reputation for reliability and excellence, setting us apart
+                  from the competition.
                 </p>
               </div>
             </div>
@@ -199,15 +241,18 @@ export default function FarmAppLanding() {
                   Ready to Transform Your Farm?
                 </h2>
                 <p className="max-w-[600px] text-blue-50 md:text-xl">
-                  Join thousands of farmers who are already using our platform to optimize their operations and increase
-                  profitability.
+                  Join thousands of farmers who are already using our platform
+                  to optimize their operations and increase profitability.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center lg:justify-end">
                 <Button className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac]">
                   Start Free Trial
                 </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-blue-700 dark:hover:bg-blue-900">
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-blue-700 dark:hover:bg-blue-900"
+                >
                   Schedule Demo
                 </Button>
               </div>
@@ -233,7 +278,8 @@ export default function FarmAppLanding() {
                 />
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Smart farming solutions for modern agriculture. Streamline operations and increase yields.
+                Smart farming solutions for modern agriculture. Streamline
+                operations and increase yields.
               </p>
             </div>
             <div className="space-y-3">
@@ -350,7 +396,7 @@ export default function FarmAppLanding() {
           </div>
           <div className="flex flex-col gap-3 sm:flex-row justify-between items-center border-t pt-6 dark:border-gray-800">
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              © {new Date().getFullYear()} Terra. All rights reserved.
+              © {new Date().getFullYear()} hiterra. All rights reserved.
             </p>
             <div className="flex gap-4">
               <Link
@@ -376,6 +422,5 @@ export default function FarmAppLanding() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
-

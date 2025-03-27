@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import FarmAppLanding from "../farm-app-landing"
+import FarmAppLanding from "../htr-landing";
 
 export default function SyntheticV0PageForDeployment() {
-  return <FarmAppLanding />
+  return <FarmAppLanding />;
 }
