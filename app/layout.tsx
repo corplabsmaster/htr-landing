@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   title: "Hiterra AI",
   description: "Everything starts with soil",
   generator: "v0.dev",
+  metadataBase: new URL("https://hiterra.co"),
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
+          enableSystem={true}
           disableTransitionOnChange
         >
           {children}

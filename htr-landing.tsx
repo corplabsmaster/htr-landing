@@ -6,9 +6,70 @@ import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function FarmAppLanding() {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobileBreakpoint = 768;
+      setIsMobile(window.innerWidth < mobileBreakpoint);
+    };
+
+    // Initial check
+    if (typeof window !== "undefined") {
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", checkMobile);
+      }
+    };
+  }, []);
+
+  // After mounting, we can access the theme and ensure it's light on first visit
+  useEffect(() => {
+    setMounted(true);
+
+    // Check if this is the first visit
+    if (typeof window !== "undefined") {
+      const isFirstVisit = !localStorage.getItem("visited");
+
+      if (isFirstVisit) {
+        // For mobile devices, check if user prefers dark mode
+        if (
+          isMobile &&
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+        localStorage.setItem("visited", "true");
+      }
+    }
+  }, [setTheme, isMobile]);
+
+  // Handle form submission without page reload
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add your sign-up logic here
+    console.log("Sign-up form submitted");
+  };
+
+  // Handle button clicks without affecting theme
+  const handleButtonClick = (action: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Add your button action logic here
+    console.log(`${action} button clicked`);
+  };
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-950">
@@ -17,14 +78,14 @@ export default function FarmAppLanding() {
           <div className="flex items-center gap-2">
             <Image
               src={
-                theme === "dark"
+                mounted && theme === "dark"
                   ? "/logos/htrr-logo-horizonta-negative.svg"
                   : "/logos/htr-logo-horizonta-positive.svg"
               }
               alt="Terra Logo"
               width={120}
               height={24}
-              className="h-8 w-auto"
+              className="h-6 md:h-8 w-auto"
             />
           </div>
           <nav className="hidden md:flex gap-6">
@@ -46,6 +107,12 @@ export default function FarmAppLanding() {
             >
               Why Us
             </Link>
+            <Link
+              href="/blog"
+              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
+            >
+              Insights
+            </Link>
           </nav>
           <div className="flex items-center gap-4">
             <Link
@@ -55,7 +122,10 @@ export default function FarmAppLanding() {
               Log In
             </Link>
             <ThemeToggle />
-            <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
+              onClick={handleButtonClick("Get Started")}
+            >
               Get Started
             </Button>
           </div>
@@ -84,7 +154,7 @@ export default function FarmAppLanding() {
                   </p>
                 </div>
                 <div className="w-full max-w-sm space-y-2">
-                  <form className="flex gap-2">
+                  <form className="flex gap-2" onSubmit={handleSignUp}>
                     <Input
                       type="email"
                       placeholder="Enter your email"
@@ -246,12 +316,16 @@ export default function FarmAppLanding() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
-                <Button className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac] px-8 py-6 h-auto font-medium text-base">
+                <Button
+                  className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac] px-8 py-6 h-auto font-medium text-base"
+                  onClick={handleButtonClick("Start Free Trial")}
+                >
                   Start Free Trial
                 </Button>
                 <Button
                   variant="outline"
                   className="border-white border-2 bg-blue-700 text-white px-8 py-6 h-auto font-medium text-base hover:bg-blue-800 hover:text-white focus:text-white active:text-white dark:bg-blue-900 dark:hover:bg-blue-950"
+                  onClick={handleButtonClick("Schedule Demo")}
                 >
                   Schedule Demo
                 </Button>
@@ -268,14 +342,14 @@ export default function FarmAppLanding() {
               <div className="flex items-center gap-2">
                 <Image
                   src={
-                    theme === "dark"
+                    mounted && theme === "dark"
                       ? "/logos/htrr-logo-horizonta-negative.svg"
                       : "/logos/htr-logo-horizonta-positive.svg"
                   }
                   alt="hiterra Logo"
                   width={120}
                   height={24}
-                  className="h-8 w-auto"
+                  className="h-6 md:h-8 w-auto"
                 />
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -342,10 +416,10 @@ export default function FarmAppLanding() {
                   </li>
                   <li>
                     <Link
-                      href="#"
+                      href="/blog"
                       className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                     >
-                      Blog
+                      Insights
                     </Link>
                   </li>
                   <li>
