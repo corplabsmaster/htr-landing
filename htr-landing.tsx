@@ -1,8 +1,8 @@
 "use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
