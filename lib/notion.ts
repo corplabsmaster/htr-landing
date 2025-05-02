@@ -25,12 +25,42 @@ export async function getBlogPosts() {
     // First, let's get the database structure to understand its properties
     let statusPropertyType = null;
     let statusPropertyName = "Status"; // Default name, will be updated if we find it
+    let datePropertyName = "Created time"; // Default to created time which always exists
 
     try {
       const database = await notion.databases.retrieve({
         database_id: databaseId,
       });
       console.log("Database properties:", Object.keys(database.properties));
+
+      // Look for date properties we can sort by
+      for (const [propName, propValue] of Object.entries(database.properties)) {
+        // @ts-ignore
+        const propType = propValue.type;
+
+        // Check for common date property names
+        if (
+          propType === "date" ||
+          propType === "created_time" ||
+          propType === "last_edited_time"
+        ) {
+          // Prioritize properties that are likely publication dates
+          if (
+            propName.toLowerCase().includes("publish") ||
+            propName.toLowerCase().includes("date") ||
+            propName.toLowerCase() === "published"
+          ) {
+            datePropertyName = propName;
+            console.log(`Found date property for sorting: ${datePropertyName}`);
+            break;
+          }
+
+          // Keep track of any date property as a fallback
+          if (datePropertyName === "Created time") {
+            datePropertyName = propName;
+          }
+        }
+      }
 
       // Check for Status property (could be named differently)
       for (const [propName, propValue] of Object.entries(database.properties)) {
@@ -58,11 +88,30 @@ export async function getBlogPosts() {
       database_id: databaseId,
       sorts: [
         {
-          property: "Published",
+          property: datePropertyName,
           direction: "descending",
         },
       ],
     };
+
+    // If we're sorting by a system property rather than a user-defined one
+    if (datePropertyName === "Created time") {
+      queryOptions.sorts = [
+        {
+          timestamp: "created_time",
+          direction: "descending",
+        },
+      ];
+    } else if (datePropertyName === "Last edited time") {
+      queryOptions.sorts = [
+        {
+          timestamp: "last_edited_time",
+          direction: "descending",
+        },
+      ];
+    }
+
+    console.log(`Sorting blog posts by: ${datePropertyName}`);
 
     // Add filter for published posts if we found a Status property
     if (statusPropertyType) {

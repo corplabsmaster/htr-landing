@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -32,6 +33,7 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
+          <Toaster position="top-center" />
           {children}
         </ThemeProvider>
       </body>

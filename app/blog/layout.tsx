@@ -64,7 +64,7 @@ export default function InsightsLayout({ children }: { children: ReactNode }) {
           </nav>
           <div className="flex items-center gap-4">
             <Link
-              href="#"
+              href="https://app.hiterra.co/app/access/?mode=login"
               className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors hidden md:block"
             >
               Log In

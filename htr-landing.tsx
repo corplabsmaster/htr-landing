@@ -7,11 +7,14 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "sonner"; // Using sonner for toast notifications
 
 export default function FarmAppLanding() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -57,11 +60,44 @@ export default function FarmAppLanding() {
     }
   }, [setTheme, isMobile]);
 
-  // Handle form submission without page reload
-  const handleSignUp = (e: React.FormEvent) => {
+  // Handle form submission
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your sign-up logic here
-    console.log("Sign-up form submitted");
+
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+    console.log("Submitting email:", email);
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log("Response status:", response.status);
+      const data = await response.json();
+      console.log("Response data:", data);
+
+      if (response.ok) {
+        toast.success("Thank you for signing up!");
+        setEmail("");
+      } else {
+        toast.error(data.error || "Failed to sign up. Please try again.");
+        console.error("Error details:", data);
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Handle button clicks without affecting theme
@@ -116,7 +152,7 @@ export default function FarmAppLanding() {
           </nav>
           <div className="flex items-center gap-4">
             <Link
-              href="#"
+              href="https://app.hiterra.co/app/access/?mode=login"
               className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors hidden md:block"
             >
               Log In
@@ -159,12 +195,16 @@ export default function FarmAppLanding() {
                       type="email"
                       placeholder="Enter your email"
                       className="max-w-lg flex-1 dark:bg-gray-800 dark:border-gray-700"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                     <Button
                       type="submit"
                       className="bg-[#2c5b2d] hover:bg-[#1e3e1f] dark:bg-[#2ae1ac] dark:text-gray-900 dark:hover:bg-[#1bc393]"
+                      disabled={isSubmitting}
                     >
-                      Sign Up
+                      {isSubmitting ? "Signing Up..." : "Sign Up"}
                     </Button>
                   </form>
                   <p className="text-xs text-gray-500 dark:text-gray-400">

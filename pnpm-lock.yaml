@@ -113,6 +113,9 @@ dependencies:
   embla-carousel-react:
     specifier: 8.5.1
     version: 8.5.1(react@19.0.0)
+  htmx.org:
+    specifier: ^1.9.12
+    version: 1.9.12
   input-otp:
     specifier: 1.4.1
     version: 1.4.1(react-dom@19.0.0)(react@19.0.0)
@@ -2749,6 +2752,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+
+  /htmx.org@1.9.12:
+    resolution: {integrity: sha512-VZAohXyF7xPGS52IM8d1T1283y+X4D+Owf3qY1NZ9RuBypyu9l8cGsxUMAG5fEAb/DhT7rDoJ9Hpu5/HxFD3cw==}
+    dev: false
 
   /http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
