@@ -7,10 +7,14 @@ export function filterPostsByCategory(
   posts: Post[],
   categoryName: string | null
 ): Post[] {
-  if (!categoryName) return posts;
+  if (!categoryName) {
+    return posts;
+  }
 
   return posts.filter((post) =>
-    post.categories.some((category) => category.name === categoryName)
+    post.categories.some(
+      (category) => category.name.toLowerCase() === categoryName.toLowerCase()
+    )
   );
 }
 
@@ -32,33 +36,124 @@ export function getUniqueCategories(posts: Post[]): Category[] {
 }
 
 /**
- * Gets related posts based on categories
+ * Gets related posts with a diverse mix of content
+ * @param currentPost The current post to find related posts for
+ * @param allPosts All available posts
+ * @param limit Maximum number of related posts to return
+ * @param excludePosts Additional posts to exclude (optional)
+ * @returns Array of related posts
  */
 export function getRelatedPosts(
   currentPost: Post,
   allPosts: Post[],
-  limit: number = 3
+  limit: number = 3,
+  excludePosts: Post[] = []
 ): Post[] {
-  // Don't include the current post
-  const otherPosts = allPosts.filter((post) => post.id !== currentPost.id);
+  // Create a set of IDs to exclude (current post and any specified excluded posts)
+  const excludeIds = new Set<string>([
+    currentPost.id,
+    ...excludePosts.map((post) => post.id),
+  ]);
 
-  // Get category IDs from the current post
-  const categoryIds = new Set(currentPost.categories.map((cat) => cat.id));
+  // Filter out the current post and any excluded posts
+  const candidatePosts = allPosts.filter((post) => !excludeIds.has(post.id));
 
-  // Score posts by how many matching categories they have
-  const scoredPosts = otherPosts.map((post) => {
-    const matchingCategories = post.categories.filter((cat) =>
-      categoryIds.has(cat.id)
+  if (candidatePosts.length === 0) return [];
+
+  // Extract category names from current post
+  const currentPostCategories = new Set(
+    currentPost.categories.map((category) => category.name.toLowerCase())
+  );
+
+  // Score each post based on multiple factors
+  const scoredPosts = candidatePosts.map((post) => {
+    // Count matching categories
+    const matchingCategoriesCount = post.categories.filter((category) =>
+      currentPostCategories.has(category.name.toLowerCase())
+    ).length;
+
+    // Title similarity (crude but effective for finding similar topics)
+    const titleWords = new Set(
+      currentPost.title
+        .toLowerCase()
+        .split(/\s+/)
+        .filter((w) => w.length > 3)
     );
+    const postTitleWords = post.title
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((w) => w.length > 3);
+    const titleSimilarity =
+      postTitleWords.filter((word) => titleWords.has(word)).length /
+      Math.max(1, Math.sqrt(titleWords.size * postTitleWords.length));
+
+    // Content length similarity - prefer posts of similar length
+    const excerptLengthSimilarity =
+      1 -
+      Math.abs(post.excerpt.length - currentPost.excerpt.length) /
+        Math.max(post.excerpt.length, currentPost.excerpt.length, 1);
+
+    // Diversity score - reward posts from categories not in current post
+    // (This ensures we get some posts that are different)
+    const uniqueCategories = post.categories.filter(
+      (category) => !currentPostCategories.has(category.name.toLowerCase())
+    ).length;
+
+    // Calculate recency - newer posts get higher scores
+    const postDate = post.published ? new Date(post.published).getTime() : 0;
+    const currentDate = Date.now();
+    const recency = postDate
+      ? Math.min(1, (currentDate - postDate) / (90 * 24 * 60 * 60 * 1000))
+      : 0.5;
+
+    // Combined score with different weights
+    const similarityScore =
+      matchingCategoriesCount * 2 + // Category match is important
+      titleSimilarity * 1.5 + // Title similarity matters
+      excerptLengthSimilarity * 0.5 + // Length similarity is minor
+      (post.authorName === currentPost.authorName ? 1 : 0) + // Same author bonus
+      uniqueCategories * 0.7 + // Reward some diversity
+      recency * 0.8; // Newer content gets a boost
+
     return {
       post,
-      score: matchingCategories.length,
+      score: similarityScore,
+      // Keep track of whether this post has matching categories
+      hasMatchingCategory: matchingCategoriesCount > 0,
+      // Recency as a secondary sort factor
+      date: post.published || "",
     };
   });
 
-  // Sort by score (highest first) and take the top 'limit' posts
-  return scoredPosts
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((item) => item.post);
+  // Sort by score (descending)
+  const sortedPosts = scoredPosts.sort((a, b) => b.score - a.score);
+
+  // If we have enough posts, ensure diversity by taking:
+  // - First half: posts with highest similarity (likely category matches)
+  // - Second half: diverse picks (likely different categories)
+  if (sortedPosts.length >= limit * 2) {
+    const halfLimit = Math.ceil(limit / 2);
+
+    // Get the top scoring posts for the first half
+    const similarPosts = sortedPosts
+      .filter((item) => item.hasMatchingCategory)
+      .slice(0, halfLimit);
+
+    // Get diverse posts for the second half, prioritizing those without matching categories
+    const diversePosts = sortedPosts
+      .filter((item) => !similarPosts.includes(item))
+      .sort((a, b) =>
+        a.hasMatchingCategory === b.hasMatchingCategory
+          ? b.score - a.score
+          : a.hasMatchingCategory
+          ? 1
+          : -1
+      )
+      .slice(0, limit - similarPosts.length);
+
+    return [...similarPosts, ...diversePosts].map((item) => item.post);
+  }
+
+  // If we don't have many posts, just return the highest scoring ones
+  return sortedPosts.slice(0, limit).map((item) => item.post);
 }

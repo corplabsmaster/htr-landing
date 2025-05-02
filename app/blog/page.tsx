@@ -6,39 +6,15 @@ export const revalidate = 3600;
 
 function LoadingState() {
   return (
-    <div className="min-h-[60vh] flex flex-col justify-center items-center py-20">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2c5b2d] dark:border-[#2ae1ac]"></div>
-      <p className="mt-4 text-gray-500 dark:text-gray-400">
-        Loading insights...
-      </p>
-
-      {/* Skeleton loaders for content */}
-      <div className="container px-4 md:px-6 mt-8 max-w-screen-lg">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(6)].map((_, index) => (
-            <div
-              key={index}
-              className="animate-pulse flex flex-col h-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800"
-            >
-              <div className="bg-gray-200 dark:bg-gray-700 h-48 w-full"></div>
-              <div className="p-6 flex-1">
-                <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                  </div>
-                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div className="min-h-[80vh] flex items-center justify-center">
+      <div className="flex flex-col items-center animate-fadeIn">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-t-primary border-r-transparent border-b-primary border-l-transparent rounded-full animate-spin"></div>
+          <div className="absolute inset-0 w-16 h-16 border-4 border-t-transparent border-r-primary border-b-transparent border-l-primary rounded-full animate-spinReverse opacity-70"></div>
         </div>
+        <p className="text-gray-600 dark:text-gray-400 font-medium mt-4 animate-spinnerPulse">
+          Loading blog posts...
+        </p>
       </div>
     </div>
   );
@@ -81,6 +57,10 @@ export default async function BlogPage({
 }: {
   searchParams: { category?: string };
 }) {
+  // Await searchParams before using it
+  const params = await searchParams;
+  const selectedCategory = params?.category || null;
+
   // Fetch data server-side
   try {
     const [posts, categories] = await Promise.all([
@@ -101,12 +81,8 @@ export default async function BlogPage({
 
     // Check if we have any posts (even if they're filtered out)
     if (posts.length === 0) {
-      return (
-        <ErrorState message="No blog posts found in your Notion database. Make sure your database contains published articles." />
-      );
+      return <ErrorState message="Ops, No blog posts found in our database" />;
     }
-
-    const selectedCategory = searchParams.category || null;
 
     // Pre-filter posts server-side based on URL params
     // Ensure we're filtering on non-null posts

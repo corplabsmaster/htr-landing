@@ -107,10 +107,37 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        skeletonPulse: {
+          "0%": { opacity: "0.5" },
+          "50%": { opacity: "0.8" },
+          "100%": { opacity: "0.5" },
+        },
+        spinReverse: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(-360deg)" },
+        },
+        spinnerPulse: {
+          "0%": { opacity: "0.6", transform: "scale(1)" },
+          "50%": { opacity: "0.9", transform: "scale(1.05)" },
+          "100%": { opacity: "0.6", transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        fadeIn: "fadeIn 0.6s ease-in-out",
+        fadeOut: "fadeOut 0.8s ease-in-out",
+        skeletonFade: "skeletonPulse 1.8s ease-in-out infinite",
+        spinReverse: "spinReverse 1.5s linear infinite",
+        spinnerPulse: "spinnerPulse 2s ease-in-out infinite",
       },
     },
   },

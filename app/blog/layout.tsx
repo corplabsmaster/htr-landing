@@ -1,10 +1,10 @@
 "use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
+import { Button } from "../components/ui/button";
+import { ThemeToggle } from "../components/ui/theme-toggle";
 
 export default function InsightsLayout({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);

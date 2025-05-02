@@ -270,7 +270,7 @@ function renderBlock(block: any) {
       return (
         <blockquote
           key={id}
-          className="pl-4 border-l-4 border-[#2c5b2d] dark:border-[#2ae1ac] my-4 italic text-gray-700 dark:text-gray-300"
+          className="pl-6 py-3 border-l-4 border-[#2c5b2d] dark:border-[#2ae1ac] my-6 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg"
         >
           {block.quote.rich_text.map((text: any, i: number) => (
             <TextRenderer key={i} text={text} />
@@ -359,12 +359,14 @@ function renderBlock(block: any) {
       return (
         <div
           key={id}
-          className="flex p-4 my-4 bg-gray-100 dark:bg-gray-800 rounded-lg"
+          className="flex p-6 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-lg border-l-4 border-[#2c5b2d] dark:border-[#2ae1ac] shadow-sm"
         >
           {block.callout.icon && block.callout.icon.type === "emoji" && (
-            <div className="mr-4 text-2xl">{block.callout.icon.emoji}</div>
+            <div className="mr-4 text-2xl flex-shrink-0">
+              {block.callout.icon.emoji}
+            </div>
           )}
-          <div>
+          <div className="flex-1">
             {block.callout.rich_text.map((text: any, i: number) => (
               <TextRenderer key={i} text={text} />
             ))}
@@ -432,7 +434,7 @@ function TextRenderer({ text }: { text: any }) {
 
   // Apply all the annotations
   let className = "";
-  if (bold) className += " font-bold";
+  if (bold) className += " font-bold text-[#2c5b2d] dark:text-[#2ae1ac]";
   if (italic) className += " italic";
   if (strikethrough) className += " line-through";
   if (underline) className += " underline";

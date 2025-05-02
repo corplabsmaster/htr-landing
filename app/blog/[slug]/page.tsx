@@ -1,18 +1,19 @@
+import BackToInsightsButton from "@/app/components/blog/back-button";
+import CategoryLink from "@/app/components/blog/category-link";
 import NotionRenderer from "@/app/components/blog/notion-renderer";
 import RelatedPosts from "@/app/components/blog/related-posts";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/notion";
 import { formatDate } from "@/lib/utils";
-import { Post } from "@/types/blog";
+import { Category, Post } from "@/types/blog";
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 export const revalidate = 3600; // Revalidate this page every hour
 
 // Loading component for blog post
-function BlogPostLoading() {
+function BlogPostLoading({ showBanner = false }: { showBanner?: boolean }) {
   return (
     <div className="min-h-screen">
       {/* Header area */}
@@ -22,8 +23,10 @@ function BlogPostLoading() {
         </div>
       </div>
 
-      {/* Banner image skeleton */}
-      <div className="w-full relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+      {/* Banner image skeleton - only shown if showBanner is true */}
+      {showBanner && (
+        <div className="w-full relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+      )}
 
       {/* Content area */}
       <article className="container px-4 py-12 md:px-6 mx-auto">
@@ -73,6 +76,9 @@ export async function generateMetadata({
     };
   }
 
+  // Check if the banner image exists and is not empty
+  const hasBannerImage = !!post.bannerImage && post.bannerImage.trim() !== "";
+
   return {
     title: post.seoTitle || post.title,
     description: post.metaDescription || post.excerpt,
@@ -85,7 +91,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.published ?? undefined,
       authors: post.authorName ? [post.authorName] : undefined,
-      ...(post.bannerImage
+      ...(hasBannerImage
         ? {
             images: [
               {
@@ -102,7 +108,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.seoTitle || post.title,
       description: post.metaDescription || post.excerpt,
-      ...(post.bannerImage ? { images: [post.bannerImage] } : {}),
+      ...(hasBannerImage ? { images: [post.bannerImage] } : {}),
     },
   };
 }
@@ -111,8 +117,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Extract slug from params first
   const slug = params.slug;
 
+  // Try to get post just to check if it has a banner image
+  // This is an optimization to avoid showing the banner skeleton if the post doesn't have a banner
+  let hasBanner = false;
+  try {
+    const post = await getBlogPostBySlug(slug);
+    hasBanner = !!post?.bannerImage;
+  } catch (error) {
+    // Ignore errors here, we're just checking
+  }
+
   return (
-    <Suspense fallback={<BlogPostLoading />}>
+    <Suspense fallback={<BlogPostLoading showBanner={hasBanner} />}>
       <BlogPostContent slug={slug} />
     </Suspense>
   );
@@ -133,34 +149,18 @@ async function BlogPostContent({ slug }: { slug: string }) {
   // Filter out null posts for type safety
   const allPosts = allPostsWithNull.filter(Boolean) as Post[];
 
+  // Check if the banner image exists and is not empty
+  const hasBannerImage = !!post.bannerImage && post.bannerImage.trim() !== "";
+
   return (
     <>
       <div className="py-6 md:py-10 bg-gradient-to-b from-lime-300/30 to-white dark:from-blue-900/30 dark:to-gray-950">
         <div className="container px-4 md:px-6">
-          <Link
-            href="/blog"
-            className="inline-flex items-center mb-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
-          >
-            <svg
-              className="mr-1 h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            Back to Insights
-          </Link>
+          <BackToInsightsButton />
         </div>
       </div>
 
-      {post.bannerImage && (
+      {hasBannerImage && (
         <div className="w-full relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
           <img
             src={post.bannerImage}
@@ -186,9 +186,7 @@ async function BlogPostContent({ slug }: { slug: string }) {
           <meta itemProp="author" content={post.authorName} />
         )}
         <meta itemProp="headline" content={post.seoTitle || post.title} />
-        {post.bannerImage && (
-          <meta itemProp="image" content={post.bannerImage} />
-        )}
+        {hasBannerImage && <meta itemProp="image" content={post.bannerImage} />}
         <meta itemProp="articleBody" content={post.excerpt} />
 
         <div className="w-full max-w-3xl mx-auto">
@@ -196,14 +194,8 @@ async function BlogPostContent({ slug }: { slug: string }) {
           <div className="mb-10">
             {post.categories && post.categories.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
-                {post.categories.map((category: any) => (
-                  <Link
-                    key={category.id}
-                    href={`/blog?category=${category.name}`}
-                    className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-[#2c5b2d]/10 text-[#2c5b2d] dark:bg-[#2ae1ac]/10 dark:text-[#2ae1ac]"
-                  >
-                    {category.name}
-                  </Link>
+                {post.categories.map((category: Category) => (
+                  <CategoryLink key={category.id} category={category} />
                 ))}
               </div>
             )}
@@ -332,7 +324,12 @@ async function BlogPostContent({ slug }: { slug: string }) {
           </div>
 
           {/* Related posts */}
-          <RelatedPosts currentPost={post} allPosts={allPosts} limit={3} />
+          <RelatedPosts
+            currentPost={post}
+            allPosts={allPosts}
+            limit={3}
+            excludePosts={[post]}
+          />
         </div>
       </article>
     </>

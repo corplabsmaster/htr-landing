@@ -86,14 +86,18 @@ export default function FarmAppLanding() {
       console.log("Response data:", data);
 
       if (response.ok) {
-        toast.success("Thank you for signing up!");
+        toast.success("Thank you! We'll be in touch about our app demo.");
         setEmail("");
       } else {
-        toast.error(data.error || "Failed to sign up. Please try again.");
+        toast.error(
+          data.error || "Signup failed. Please try again or contact support."
+        );
         console.error("Error details:", data);
       }
     } catch (error) {
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(
+        "Connection error. Please check your internet and try again."
+      );
       console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);

@@ -1,11 +1,13 @@
 export interface Category {
-  id: string;
+  id: string; // The ID used for UI operations
+  notionId?: string; // The original Notion ID
   name: string;
   color: string;
 }
 
 export interface Post {
-  id: string;
+  id: string; // Stable, shortened ID for client-side operations
+  notionId?: string; // Original Notion page ID
   title: string;
   seoTitle: string;
   metaDescription: string;
@@ -18,6 +20,7 @@ export interface Post {
   authorRole?: string;
   categories: Category[];
   status?: string | null;
+  propertyIds?: Record<string, string | null>; // Notion property IDs for reference
 }
 
 export interface BlogContentProps {

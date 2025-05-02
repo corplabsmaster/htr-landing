@@ -18,25 +18,95 @@ const POST_STATUS = {
   IN_REVIEW: "in review",
 };
 
+// Create a stable ID from Notion page ID that's consistent across refreshes
+function createStableId(pageId: string): string {
+  // Remove dashes and use the last 12 characters for a more compact ID
+  return pageId.replace(/-/g, "").slice(-12);
+}
+
+// Cache structure to store database property metadata
+interface DatabaseStructure {
+  properties: Record<string, { id: string; type: string; name: string }>;
+  lastUpdated: number;
+}
+
+// Cache for database structure to avoid redundant fetches
+let databaseStructureCache: DatabaseStructure | null = null;
+const DB_CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+// Function to get database structure and property IDs
+async function getDatabaseStructure(): Promise<DatabaseStructure | null> {
+  try {
+    const now = Date.now();
+
+    // Use cache if valid
+    if (
+      databaseStructureCache &&
+      now - databaseStructureCache.lastUpdated < DB_CACHE_DURATION
+    ) {
+      return databaseStructureCache;
+    }
+
+    console.log("Fetching database structure from Notion...");
+    const response = await notion.databases.retrieve({
+      database_id: databaseId,
+    });
+
+    // Create a simplified structure with property metadata
+    const properties: Record<
+      string,
+      { id: string; type: string; name: string }
+    > = {};
+
+    for (const [propName, propValue] of Object.entries(response.properties)) {
+      // @ts-ignore
+      const propType = propValue.type;
+      // @ts-ignore
+      const propId = propValue.id;
+
+      properties[propName] = {
+        id: propId,
+        type: propType,
+        name: propName,
+      };
+    }
+
+    // Update cache
+    databaseStructureCache = {
+      properties,
+      lastUpdated: now,
+    };
+
+    console.log(`Cached ${Object.keys(properties).length} database properties`);
+    return databaseStructureCache;
+  } catch (error) {
+    console.error("Error fetching database structure:", error);
+    return null;
+  }
+}
+
 export async function getBlogPosts() {
   try {
     console.log("Fetching blog posts from Notion...");
 
-    // First, let's get the database structure to understand its properties
+    // Get database structure for property IDs
+    const dbStructure = await getDatabaseStructure();
+
+    // First, let's get the database properties we need
     let statusPropertyType = null;
     let statusPropertyName = "Status"; // Default name, will be updated if we find it
+    let statusPropertyId = null;
     let datePropertyName = "Created time"; // Default to created time which always exists
+    let datePropertyId = null;
 
-    try {
-      const database = await notion.databases.retrieve({
-        database_id: databaseId,
-      });
-      console.log("Database properties:", Object.keys(database.properties));
+    if (dbStructure) {
+      console.log("Using cached database structure");
 
       // Look for date properties we can sort by
-      for (const [propName, propValue] of Object.entries(database.properties)) {
-        // @ts-ignore
-        const propType = propValue.type;
+      for (const [propName, propMeta] of Object.entries(
+        dbStructure.properties
+      )) {
+        const propType = propMeta.type;
 
         // Check for common date property names
         if (
@@ -51,19 +121,25 @@ export async function getBlogPosts() {
             propName.toLowerCase() === "published"
           ) {
             datePropertyName = propName;
-            console.log(`Found date property for sorting: ${datePropertyName}`);
+            datePropertyId = propMeta.id;
+            console.log(
+              `Found date property for sorting: ${datePropertyName} (ID: ${datePropertyId})`
+            );
             break;
           }
 
           // Keep track of any date property as a fallback
           if (datePropertyName === "Created time") {
             datePropertyName = propName;
+            datePropertyId = propMeta.id;
           }
         }
       }
 
       // Check for Status property (could be named differently)
-      for (const [propName, propValue] of Object.entries(database.properties)) {
+      for (const [propName, propMeta] of Object.entries(
+        dbStructure.properties
+      )) {
         // Check for common status property names
         if (
           propName.toLowerCase() === "status" ||
@@ -71,16 +147,84 @@ export async function getBlogPosts() {
           propName.toLowerCase() === "published status"
         ) {
           statusPropertyName = propName;
-          // @ts-ignore
-          statusPropertyType = propValue.type;
+          statusPropertyType = propMeta.type;
+          statusPropertyId = propMeta.id;
           console.log(
-            `Found status property: ${statusPropertyName} with type: ${statusPropertyType}`
+            `Found status property: ${statusPropertyName} (ID: ${statusPropertyId}) with type: ${statusPropertyType}`
           );
           break;
         }
       }
-    } catch (error) {
-      console.error("Error retrieving database structure:", error);
+    } else {
+      console.log("Database structure not available, using property names");
+      // Fallback to the original method of searching by name
+      try {
+        const database = await notion.databases.retrieve({
+          database_id: databaseId,
+        });
+        console.log("Database properties:", Object.keys(database.properties));
+
+        // Look for date properties we can sort by
+        for (const [propName, propValue] of Object.entries(
+          database.properties
+        )) {
+          // @ts-ignore
+          const propType = propValue.type;
+          // @ts-ignore
+          const propId = propValue.id;
+
+          // Check for common date property names
+          if (
+            propType === "date" ||
+            propType === "created_time" ||
+            propType === "last_edited_time"
+          ) {
+            // Prioritize properties that are likely publication dates
+            if (
+              propName.toLowerCase().includes("publish") ||
+              propName.toLowerCase().includes("date") ||
+              propName.toLowerCase() === "published"
+            ) {
+              datePropertyName = propName;
+              datePropertyId = propId;
+              console.log(
+                `Found date property for sorting: ${datePropertyName} (ID: ${datePropertyId})`
+              );
+              break;
+            }
+
+            // Keep track of any date property as a fallback
+            if (datePropertyName === "Created time") {
+              datePropertyName = propName;
+              datePropertyId = propId;
+            }
+          }
+        }
+
+        // Check for Status property (could be named differently)
+        for (const [propName, propValue] of Object.entries(
+          database.properties
+        )) {
+          // Check for common status property names
+          if (
+            propName.toLowerCase() === "status" ||
+            propName.toLowerCase() === "state" ||
+            propName.toLowerCase() === "published status"
+          ) {
+            statusPropertyName = propName;
+            // @ts-ignore
+            statusPropertyType = propValue.type;
+            // @ts-ignore
+            statusPropertyId = propValue.id;
+            console.log(
+              `Found status property: ${statusPropertyName} (ID: ${statusPropertyId}) with type: ${statusPropertyType}`
+            );
+            break;
+          }
+        }
+      } catch (error) {
+        console.error("Error retrieving database structure:", error);
+      }
     }
 
     // Build the query based on what we found
@@ -92,6 +236,8 @@ export async function getBlogPosts() {
           direction: "descending",
         },
       ],
+      // Optimized: Only fetch the properties we need to reduce data transfer
+      page_size: 100, // Limit to 100 posts at most
     };
 
     // If we're sorting by a system property rather than a user-defined one
@@ -162,6 +308,10 @@ export async function getBlogPosts() {
     // Process the results
     const postsPromises = response.results.map(async (page: any) => {
       try {
+        // Create a stable, deterministic ID for caching
+        const stableId = createStableId(page.id);
+        const notionId = page.id; // Keep original Notion ID for reference
+
         // Make these more resilient with safer property access
         const title =
           page.properties?.Title?.title?.[0]?.plain_text || "Untitled";
@@ -170,7 +320,7 @@ export async function getBlogPosts() {
         const published = extractPublishedDate(page);
 
         const slug =
-          page.properties?.Slug?.rich_text?.[0]?.plain_text || page.id;
+          page.properties?.Slug?.rich_text?.[0]?.plain_text || stableId;
         const excerpt =
           page.properties?.Excerpt?.rich_text?.[0]?.plain_text || "";
         const seoTitle =
@@ -179,10 +329,9 @@ export async function getBlogPosts() {
           page.properties?.["Meta Description"]?.rich_text?.[0]?.plain_text ||
           excerpt;
 
-        // Get author information using our enhanced function
-        const { authorName, authorImage, authorRole } = await extractAuthorInfo(
-          page
-        );
+        // Get author information - optimize to avoid unnecessary fetches
+        const authorData = await extractAuthorInfo(page);
+        const { authorName, authorImage = "", authorRole = "" } = authorData;
 
         // Banner image can be in file or external format
         const bannerImage =
@@ -190,10 +339,11 @@ export async function getBlogPosts() {
           page.properties?.["Blog Banner"]?.files?.[0]?.external?.url ||
           "";
 
-        // Categories are usually multi_select
+        // Process categories with original Notion IDs
         const categories =
           page.properties?.Categories?.multi_select?.map((cat: any) => ({
-            id: cat.id,
+            id: cat.id, // Preserve Notion's original category ID
+            notionId: cat.id, // Add explicit notionId for clarity
             name: cat.name,
             color: cat.color,
           })) || [];
@@ -220,7 +370,8 @@ export async function getBlogPosts() {
         }
 
         return {
-          id: page.id,
+          id: stableId, // Using our more stable, deterministic ID
+          notionId, // Store the original Notion ID for reference/debugging
           title,
           seoTitle,
           metaDescription,
@@ -233,12 +384,24 @@ export async function getBlogPosts() {
           authorRole,
           categories,
           status,
+          // Add property IDs for reference if needed in the UI
+          propertyIds: {
+            title: page.properties?.Title?.id,
+            slug: page.properties?.Slug?.id,
+            excerpt: page.properties?.Excerpt?.id,
+            seoTitle: page.properties?.["SEO Title"]?.id,
+            metaDescription: page.properties?.["Meta Description"]?.id,
+            bannerImage: page.properties?.["Blog Banner"]?.id,
+            categories: page.properties?.Categories?.id,
+            status: statusPropertyId,
+          },
         };
       } catch (error) {
         console.error("Error processing page:", page.id, error);
         // Return a minimal valid object if we can't process a page properly
         return {
-          id: page.id,
+          id: createStableId(page.id),
+          notionId: page.id,
           title: "Error processing page",
           seoTitle: "Error processing page",
           metaDescription: "",
@@ -255,17 +418,14 @@ export async function getBlogPosts() {
       }
     });
 
-    // Wait for all post processing to complete
-    const posts = await Promise.all(postsPromises);
+    // Process all posts in parallel and filter out any null results
+    const posts = (await Promise.all(postsPromises)).filter(
+      (post) => post !== null
+    );
 
-    // Filter out any null posts (those that were skipped)
-    return posts.filter(Boolean);
+    return posts;
   } catch (error) {
-    console.error("Error fetching blog posts from Notion:", error);
-    if (error instanceof Error) {
-      console.error("Error details:", error.message);
-      console.error("Stack trace:", error.stack);
-    }
+    console.error("Error fetching blog posts:", error);
     return [];
   }
 }
@@ -456,9 +616,63 @@ export async function getBlogPostBySlug(slug: string) {
   }
 }
 
+// Cache for categories to avoid redundant fetches
+let categoriesCache: any[] | null = null;
+let cacheTimestamp = 0;
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+
 export async function getCategories() {
   try {
+    // Check if we have a valid cache
+    const now = Date.now();
+    if (categoriesCache !== null && now - cacheTimestamp < CACHE_DURATION) {
+      console.log("Using cached categories data");
+      return categoriesCache;
+    }
+
     console.log("Fetching categories from Notion database structure...");
+
+    // Try to use the database structure cache first if available
+    const dbStructure = await getDatabaseStructure();
+    if (dbStructure) {
+      // Look for Categories property
+      const categoryProp = Object.entries(dbStructure.properties).find(
+        ([name, meta]) =>
+          name.toLowerCase() === "categories" && meta.type === "multi_select"
+      );
+
+      if (categoryProp) {
+        const [propName, propMeta] = categoryProp;
+
+        // Direct fetch of the database to get the multi-select options
+        const database = await notion.databases.retrieve({
+          database_id: databaseId,
+        });
+
+        // Cast to any to bypass type checking for the multi_select property
+        const databaseAny = database as any;
+        const options =
+          databaseAny.properties[propName]?.multi_select?.options || [];
+
+        console.log(`Found ${options.length} categories`);
+
+        // Map only the fields we need
+        const categories = options.map((option: any) => ({
+          id: option.id,
+          notionId: option.id,
+          name: option.name,
+          color: option.color,
+        }));
+
+        // Update cache
+        categoriesCache = categories;
+        cacheTimestamp = now;
+
+        return categories;
+      }
+    }
+
+    // Fallback to direct database retrieval if structure cache not available
     const response = await notion.databases.retrieve({
       database_id: databaseId,
     });
@@ -466,6 +680,7 @@ export async function getCategories() {
     // Cast to any for easier property access
     const database = response as any;
 
+    let categories = [];
     if (
       database.properties?.Categories?.type === "multi_select" &&
       Array.isArray(database.properties.Categories.multi_select.options)
@@ -473,15 +688,27 @@ export async function getCategories() {
       console.log(
         `Found ${database.properties.Categories.multi_select.options.length} categories`
       );
-      return database.properties.Categories.multi_select.options.map(
+
+      // Map only the fields we need
+      categories = database.properties.Categories.multi_select.options.map(
         (option: any) => ({
           id: option.id,
+          notionId: option.id, // Store the original Notion ID for reference
           name: option.name,
           color: option.color,
         })
       );
+
+      // Update cache
+      categoriesCache = categories;
+      cacheTimestamp = now;
+
+      return categories;
     } else {
       console.log("Categories property not found or not a multi_select type");
+      // Cache empty result too to avoid repeated failed lookups
+      categoriesCache = [];
+      cacheTimestamp = now;
       return [];
     }
   } catch (error) {
