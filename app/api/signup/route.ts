@@ -43,29 +43,42 @@ export async function POST(request: Request) {
       `Adding email ${email} to Notion contacts database ${databaseId}`
     );
 
-    // Add the email to the Notion database
     try {
+      // Using the updated property names from the Notion database
+      // "title" (previously "Contact Name") (type: title)
+      // "email" (now type: text instead of email)
+      // "Inquiry" (type: multi select)
       const response = await notion.pages.create({
         parent: {
           database_id: databaseId,
         },
         properties: {
-          // Adjust property names to match your Notion database
+          // Title property (main property of the database)
+          Title: {
+            title: [
+              {
+                text: {
+                  content: `Landing Page Signup`,
+                },
+              },
+            ],
+          },
+          // Email is now a text property
           Email: {
-            type: "email",
-            email: email,
+            rich_text: [
+              {
+                text: {
+                  content: email,
+                },
+              },
+            ],
           },
-          "Inquiry purpose": {
-            type: "select",
-            select: {
-              name: "App Demo",
-            },
-          },
-          Date: {
-            type: "date",
-            date: {
-              start: new Date().toISOString(),
-            },
+          Inquiry: {
+            multi_select: [
+              {
+                name: "App Demo",
+              },
+            ],
           },
         },
       });
