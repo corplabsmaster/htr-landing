@@ -27,19 +27,45 @@ export default function RelatedPosts({
   useEffect(() => {
     // Simulate loading delay to show the loading state
     const timer = setTimeout(() => {
+      console.log("Current post:", currentPost.slug);
+      console.log(
+        "Excluded posts:",
+        excludePosts.map((p) => p.slug)
+      );
+
       // Get related posts, ensuring we don't repeat posts
       const posts = getRelatedPosts(currentPost, allPosts, limit, excludePosts);
 
+      console.log(
+        "Initial related posts:",
+        posts.map((p) => p.slug)
+      );
+
       // Further ensure uniqueness by slug (in case there are duplicates with different IDs)
       const uniquePosts: Post[] = [];
-      const slugSet = new Set<string>();
+      const slugSet = new Set<string>([currentPost.slug]); // Add current post slug to exclude set
 
+      // Add excluded posts' slugs to the set
+      excludePosts.forEach((post) => {
+        slugSet.add(post.slug);
+      });
+
+      console.log("Excluded slug set:", Array.from(slugSet));
+
+      // Only add posts with unique slugs and not matching the current post
       posts.forEach((post) => {
-        if (!slugSet.has(post.slug)) {
+        if (!slugSet.has(post.slug) && post.slug !== currentPost.slug) {
           slugSet.add(post.slug);
           uniquePosts.push(post);
+        } else {
+          console.log("Filtered out duplicate/current post:", post.slug);
         }
       });
+
+      console.log(
+        "Final related posts:",
+        uniquePosts.map((p) => p.slug)
+      );
 
       setRelatedPosts(uniquePosts);
       setLoading(false);
@@ -72,7 +98,7 @@ export default function RelatedPosts({
         </h3>
         <div className="grid gap-8 md:grid-cols-3">
           {[...Array(limit)].map((_, index) => (
-            <div key={index} className="flex flex-col animate-pulse">
+            <div key={index} className="flex flex-col animate-fade-in-out">
               <div className="aspect-video rounded-lg bg-gray-200 dark:bg-gray-700 mb-3"></div>
               <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
@@ -99,7 +125,7 @@ export default function RelatedPosts({
             <div
               key={post.id}
               className={`flex flex-col rounded-lg overflow-hidden transition-colors p-2 ${
-                isClicked ? "bg-[#2c5b2d]/5 dark:bg-[#2ae1ac]/5" : ""
+                isClicked ? "bg-[#2c5b2d]/5 dark:bg-lake-500/5" : ""
               }`}
             >
               {post.bannerImage && (
@@ -125,8 +151,8 @@ export default function RelatedPosts({
                   onClick={(e) => handleNavigation(e, post.id, post.slug)}
                   className={`hover:underline inline-block ${
                     isClicked
-                      ? "text-[#2c5b2d]/70 dark:text-[#2ae1ac]/70 cursor-wait rounded"
-                      : "text-[#2c5b2d] dark:text-[#2ae1ac]"
+                      ? "text-[#2c5b2d]/70 dark:text-lake-500/70 cursor-wait rounded"
+                      : "text-[#2c5b2d] dark:text-lake-500"
                   }`}
                 >
                   {post.title}
@@ -142,7 +168,7 @@ export default function RelatedPosts({
                 {post.excerpt}
               </p>
               {isClicked && (
-                <p className="text-gray-300 dark:text-gray-500 text-sm mt-2 cursor-wait">
+                <p className="text-gray-300 dark:text-gray-500 text-sm mt-2 cursor-wait animate-fade-in-out">
                   loading...
                 </p>
               )}

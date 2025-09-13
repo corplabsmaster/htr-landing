@@ -37,7 +37,7 @@ export default function BlogCard({ post }: BlogCardProps) {
       className={`flex flex-col h-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 transition-all 
       ${
         isClicked
-          ? "bg-[#2c5b2d]/5 dark:bg-[#2ae1ac]/5 border-[#2c5b2d]/30 dark:border-[#2ae1ac]/30"
+          ? "bg-[#2c5b2d]/5 dark:bg-lake-500/5 border-[#2c5b2d]/30 dark:border-lake-500/30"
           : "hover:shadow-md"
       }`}
     >
@@ -61,7 +61,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               {post.categories.map((category) => (
                 <span
                   key={category.id}
-                  className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-[#2c5b2d]/10 text-[#2c5b2d] dark:bg-[#2ae1ac]/10 dark:text-[#2ae1ac]"
+                  className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-[#2c5b2d]/10 text-[#2c5b2d] dark:bg-lake-500/10 dark:text-lake-500"
                 >
                   {category.name}
                 </span>
@@ -75,16 +75,16 @@ export default function BlogCard({ post }: BlogCardProps) {
                 onClick={handleNavigation}
                 className={`hover:underline inline-block ${
                   isClicked
-                    ? "bg-[#2c5b2d]/10 dark:bg-[#2ae1ac]/10 text-[#2c5b2d]/70 dark:text-[#2ae1ac]/70 cursor-wait rounded"
-                    : "text-[#2c5b2d] dark:text-[#2ae1ac]"
+                    ? "bg-[#2c5b2d]/10 dark:bg-lake-500/10 text-[#2c5b2d]/70 dark:text-lake-500/70 cursor-wait rounded"
+                    : "text-[#2c5b2d] dark:text-lake-500"
                 }`}
               >
-                {post.seoTitle || post.title}
+                {post.seoTitle || post.title || "No Title Available"}
               </a>
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
               {post.authorName && (
-                <span className="font-medium text-[#2c5b2d] dark:text-[#2ae1ac]">
+                <span className="font-medium text-[#2c5b2d] dark:text-lake-500">
                   {post.authorName}
                 </span>
               )}
@@ -116,7 +116,9 @@ export default function BlogCard({ post }: BlogCardProps) {
           }`}
         >
           {isClicked ? (
-            <span className="text-gray-300 dark:text-gray-500">loading...</span>
+            <span className="text-gray-300 dark:text-gray-500 animate-fade-in-out">
+              loading...
+            </span>
           ) : (
             <>
               Read more

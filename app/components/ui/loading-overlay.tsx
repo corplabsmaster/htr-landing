@@ -59,8 +59,10 @@ export default function LoadingOverlay({
     >
       <div className="flex flex-col items-center animate-fadeIn">
         <div className="relative">
-          <div className="w-20 h-20 border-4 border-t-[#2c5b2d] border-r-transparent border-b-[#2c5b2d] border-l-transparent rounded-full animate-spin dark:border-t-[#2ae1ac] dark:border-b-[#2ae1ac]"></div>
-          <div className="absolute inset-0 w-20 h-20 border-4 border-t-transparent border-r-[#2c5b2d] border-b-transparent border-l-[#2c5b2d] rounded-full animate-spinReverse opacity-70 dark:border-r-[#2ae1ac] dark:border-l-[#2ae1ac]"></div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+            <div className="h-20 w-20 rounded-full border-4 border-t-[#2c5b2d] border-b-[#2c5b2d] border-r-transparent border-l-transparent animate-spin dark:border-t-lake-400 dark:border-b-lake-400"></div>
+            <div className="absolute left-0 top-0 h-20 w-20 rounded-full border-4 border-r-[#2c5b2d] border-l-[#2c5b2d] border-t-transparent border-b-transparent animate-spinReverse opacity-70 dark:border-r-lake-400 dark:border-l-lake-400"></div>
+          </div>
         </div>
         <p className="text-gray-600 dark:text-gray-400 font-medium mt-6 animate-spinnerPulse">
           Loading content...

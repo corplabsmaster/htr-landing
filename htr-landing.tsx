@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
+import { Footer } from "@/app/components/ui/footer";
 import { Input } from "@/app/components/ui/input";
 import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 import { useTheme } from "next-themes";
@@ -9,7 +10,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner"; // Using sonner for toast notifications
 
-export default function FarmAppLanding() {
+export default function HtrAppLanding() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -111,6 +112,36 @@ export default function FarmAppLanding() {
     console.log(`${action} button clicked`);
   };
 
+  // Handle app download based on device type
+  const handleDownloadApp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const appUrl = "https://app.hiterra.co/app/access/?mode=login";
+
+    // Check if user is on mobile
+    if (/Android|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+      // For mobile users, navigate to the app
+      window.location.href = appUrl;
+
+      // Show installation instructions based on device type
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // iOS instructions
+        toast.info(
+          "To install: Tap the share icon and select 'Add to Home Screen'",
+          { duration: 6000 }
+        );
+      } else if (/Android/i.test(navigator.userAgent)) {
+        // Android instructions
+        toast.info(
+          "To install: Tap the menu (⋮) and select 'Add to Home Screen'",
+          { duration: 6000 }
+        );
+      }
+    } else {
+      // For desktop users, just redirect to the web app
+      window.open(appUrl, "_blank");
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-950">
       <header className="border-b sticky top-0 z-10 bg-white dark:bg-gray-900 dark:border-gray-800">
@@ -184,7 +215,7 @@ export default function FarmAppLanding() {
               />
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac] sm:text-5xl xl:text-6xl/none">
+                  <h1 className="text-3xl font-bold tracking-tighter text-[#2c5b2d] dark:text-lake-400 sm:text-5xl xl:text-6xl/none">
                     A Platform that helps farmers and agricultural companies to
                     be more profitable and sustainable
                   </h1>
@@ -205,7 +236,7 @@ export default function FarmAppLanding() {
                     />
                     <Button
                       type="submit"
-                      className="bg-[#2c5b2d] hover:bg-[#1e3e1f] dark:bg-[#2ae1ac] dark:text-gray-900 dark:hover:bg-[#1bc393]"
+                      className="bg-[#2c5b2d] hover:bg-lake-600 dark:bg-blue-600 dark:text-gray-900 dark:hover:bg-green-400"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Signing Up..." : "Sign Up"}
@@ -232,12 +263,12 @@ export default function FarmAppLanding() {
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-lake-400">
                 Problem
               </h2>
             </div>
             <div className="mx-auto max-w-4xl">
-              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
+              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 mb-8">
                 Farmers and agricultural companies face several challenges,
                 including{" "}
                 <span className="underline">
@@ -252,7 +283,7 @@ export default function FarmAppLanding() {
                   difficulty in choosing cost-effective products
                 </span>
               </p>
-              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac]">
+              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400">
                 These issues result in{" "}
                 <span className="underline">higher operational costs</span>,{" "}
                 <span className="underline">
@@ -271,12 +302,12 @@ export default function FarmAppLanding() {
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-lake-400">
                 Solution
               </h2>
             </div>
             <div className="mx-auto max-w-4xl">
-              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
+              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 mb-8">
                 Hiterra Argo addresses these challenges by providing an
                 AI-powered platform that delivers{" "}
                 <span className="underline">smart farming recommendations</span>
@@ -285,13 +316,13 @@ export default function FarmAppLanding() {
                   automates agricultural cycles and tasks
                 </span>
               </p>
-              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] mb-8">
+              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 mb-8">
                 The platform offers a marketplace for products and services, as
                 well as community forum for sharing knowledge, enabling farmers
                 to increase efficiency, reduce costs, and enhance overall
                 productivity.
               </p>
-              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-[#2ae1ac] font-bold">
+              <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 font-bold">
                 By implementing Hiterra Agro System, farmer and agricultural
                 companies are able to reduce more than 85% labour and 70%
                 time-saving.
@@ -302,23 +333,23 @@ export default function FarmAppLanding() {
 
         <section
           id="why-us"
-          className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-gray-900"
+          className="py-12 md:py-24 lg:py-32 bg-[#f5f5f5] dark:bg-blue-950"
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-[#2ae1ac]">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-lake-400">
                 Why Choose Us
               </h2>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
+              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Expert Team</h3>
                 <p>
                   Our skilled team brings specialized knowledge and experience
                   to provide top-notch solutions tailored to our clients' needs.
                 </p>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
+              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">
                   Cutting-Edge Technology
                 </h3>
@@ -327,7 +358,7 @@ export default function FarmAppLanding() {
                   ensuring efficient and effective services.
                 </p>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
+              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Customer Focus</h3>
                 <p>
                   We prioritize building strong relationships and understanding
@@ -335,7 +366,7 @@ export default function FarmAppLanding() {
                   trust and satisfaction.
                 </p>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-gray-800 text-white p-6 rounded-lg">
+              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Proven Success</h3>
                 <p>
                   With a track record of successful projects, we've earned a
@@ -361,197 +392,24 @@ export default function FarmAppLanding() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
                 <Button
-                  className="bg-white text-blue-600 hover:bg-lime-300 dark:hover:bg-[#2ae1ac] px-8 py-6 h-auto font-medium text-base"
+                  className="bg-white focus:text-blue-600 !text-blue-600 hover:text-white dark:!text-white dark:hover:!bg-blue-900 hover:bg-lake-400 dark:hover:!text-green-400 px-8 py-6 h-auto font-medium text-base"
                   onClick={handleButtonClick("Start Free Trial")}
                 >
                   Start Free Trial
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white border-2 bg-blue-700 text-white px-8 py-6 h-auto font-medium text-base hover:bg-blue-800 hover:text-white focus:text-white active:text-white dark:bg-blue-900 dark:hover:bg-blue-950"
-                  onClick={handleButtonClick("Schedule Demo")}
+                  className="border-white dark:border-none border-2 bg-blue-700 text-white px-8 py-6 h-auto font-medium text-base hover:bg-blue-800 hover:text-gray-800 focus:text-white active:text-white dark:bg-blue-900 dark:hover:text-lake-400"
+                  onClick={handleDownloadApp}
                 >
-                  Schedule Demo
+                  Download WebApp
                 </Button>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <footer className="border-t bg-white dark:bg-gray-900 dark:border-gray-800">
-        <div className="container flex flex-col gap-6 py-8 md:py-12 px-4 md:px-6">
-          <div className="grid grid-cols-12 gap-8">
-            {/* Logo section - takes 3 columns */}
-            <div className="col-span-12 md:col-span-3 space-y-3">
-              <div className="flex items-center gap-2">
-                <Image
-                  src={
-                    mounted && theme === "dark"
-                      ? "/logos/htrr-logo-horizonta-negative.svg"
-                      : "/logos/htr-logo-horizonta-positive.svg"
-                  }
-                  alt="hiterra Logo"
-                  width={120}
-                  height={24}
-                  className="h-6 md:h-8 w-auto"
-                />
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Smart farming AI solutions for modern agriculture. Streamline
-                operations and increase yields.
-              </p>
-            </div>
-
-            {/* Gap - takes 1 column */}
-            <div className="hidden md:block md:col-span-1"></div>
-
-            {/* Navigation group - takes 8 columns, divided into 3 sections */}
-            <div className="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Platform section */}
-              <div className="space-y-3">
-                <h3 className="font-bold dark:text-white text-lg">Platform</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Mobile App
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      AI Data Platform
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Marketplace
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Company section */}
-              <div className="space-y-3">
-                <h3 className="font-bold dark:text-white text-lg">Company</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/blog"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Insights
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Careers
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Press
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Support section */}
-              <div className="space-y-3">
-                <h3 className="font-bold dark:text-white text-lg">Support</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Help Center
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Community
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    >
-                      Status
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row justify-between items-center border-t pt-6 dark:border-gray-800">
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              © {new Date().getFullYear()} hiterra. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-              <Link
-                href="#"
-                className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="#"
-                className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="#"
-                className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-              >
-                Cookie Policy
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

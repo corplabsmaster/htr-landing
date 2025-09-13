@@ -303,7 +303,7 @@ export default function BlogContent({
       <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-lime-300 to-white dark:from-blue-900 dark:to-gray-950">
         <Container>
           <div className="space-y-4 text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-[#2c5b2d] dark:text-[#2ae1ac]">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-[#2c5b2d] dark:text-lake-400">
               Insights
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-700 dark:text-gray-400 text-md md:text-l">

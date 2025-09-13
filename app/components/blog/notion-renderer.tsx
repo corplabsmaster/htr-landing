@@ -196,7 +196,7 @@ function renderBlock(block: any) {
       return (
         <h1
           key={id}
-          className="text-3xl font-bold mt-8 mb-4 text-[#2c5b2d] dark:text-[#2ae1ac]"
+          className="text-3xl font-bold mt-8 mb-4 text-[#2c5b2d] dark:text-lake-500"
         >
           {block.heading_1.rich_text.map((text: any, i: number) => (
             <TextRenderer key={i} text={text} />
@@ -208,7 +208,7 @@ function renderBlock(block: any) {
       return (
         <h2
           key={id}
-          className="text-2xl font-bold mt-6 mb-3 text-[#2c5b2d] dark:text-[#2ae1ac]"
+          className="text-2xl font-bold mt-6 mb-3 text-[#2c5b2d] dark:text-lake-500"
         >
           {block.heading_2.rich_text.map((text: any, i: number) => (
             <TextRenderer key={i} text={text} />
@@ -220,7 +220,7 @@ function renderBlock(block: any) {
       return (
         <h3
           key={id}
-          className="text-xl font-bold mt-5 mb-2 text-[#2c5b2d] dark:text-[#2ae1ac]"
+          className="text-xl font-bold mt-5 mb-2 text-[#2c5b2d] dark:text-lake-500"
         >
           {block.heading_3.rich_text.map((text: any, i: number) => (
             <TextRenderer key={i} text={text} />
@@ -270,7 +270,7 @@ function renderBlock(block: any) {
       return (
         <blockquote
           key={id}
-          className="pl-6 py-3 border-l-4 border-[#2c5b2d] dark:border-[#2ae1ac] my-6 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg"
+          className="pl-6 py-3 border-l-4 border-[#2c5b2d] dark:border-lake-500 my-6 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg"
         >
           {block.quote.rich_text.map((text: any, i: number) => (
             <TextRenderer key={i} text={text} />
@@ -359,7 +359,7 @@ function renderBlock(block: any) {
       return (
         <div
           key={id}
-          className="flex p-6 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-lg border-l-4 border-[#2c5b2d] dark:border-[#2ae1ac] shadow-sm"
+          className="flex p-6 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-lg border-l-4 border-[#2c5b2d] dark:border-lake-500 shadow-sm"
         >
           {block.callout.icon && block.callout.icon.type === "emoji" && (
             <div className="mr-4 text-2xl flex-shrink-0">
@@ -434,7 +434,7 @@ function TextRenderer({ text }: { text: any }) {
 
   // Apply all the annotations
   let className = "";
-  if (bold) className += " font-bold text-[#2c5b2d] dark:text-[#2ae1ac]";
+  if (bold) className += " font-bold text-[#2c5b2d] dark:text-lake-500";
   if (italic) className += " italic";
   if (strikethrough) className += " line-through";
   if (underline) className += " underline";

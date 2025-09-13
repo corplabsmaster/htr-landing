@@ -10,9 +10,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Hiterra AI | Agritech AI Solutions in Malaysia",
-  description: "Everything starts with soil",
-  generator: "v0.dev",
+  title: "HiTerra AI | Agritech AI Solutions in Malaysia",
+  description:
+    "We transforms farming with AI-driven insights, global-standard carbon compliance, and ecosystem-neutral solutions for sustainable yield growth.",
   metadataBase: new URL("https://hiterra.co"),
   alternates: {
     canonical: "/",

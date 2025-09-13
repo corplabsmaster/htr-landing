@@ -18,6 +18,25 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Loading animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.animate-fade-in-out {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

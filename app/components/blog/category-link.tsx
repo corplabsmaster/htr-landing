@@ -37,8 +37,8 @@ export default function CategoryLink({ category }: CategoryLinkProps) {
         className={`inline-block px-2 py-1 text-xs font-medium rounded-full 
           ${
             isClicked
-              ? "bg-[#2c5b2d]/30 text-[#2c5b2d]/50 dark:bg-[#2ae1ac]/30 dark:text-[#2ae1ac]/50 cursor-wait"
-              : "bg-[#2c5b2d]/10 text-[#2c5b2d] dark:bg-[#2ae1ac]/10 dark:text-[#2ae1ac]"
+              ? "bg-[#2c5b2d]/30 text-[#2c5b2d]/50 dark:bg-lake-500/30 dark:text-lake-500/50 cursor-wait"
+              : "bg-[#2c5b2d]/10 text-[#2c5b2d] dark:bg-lake-500/10 dark:text-lake-500"
           }`}
       >
         {category.name}

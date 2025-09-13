@@ -43,7 +43,7 @@ export default function CategoryFilter({
           disabled={disabled}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
             selectedCategory === null
-              ? "bg-[#2c5b2d] text-white dark:bg-[#2ae1ac] dark:text-gray-900"
+              ? "bg-[#2c5b2d] text-white dark:bg-lake-500 dark:text-gray-900"
               : "bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
           } ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${
             clickedCategory === null && selectedCategory !== null
@@ -60,7 +60,7 @@ export default function CategoryFilter({
             disabled={disabled}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               selectedCategory === category.name
-                ? "bg-[#2c5b2d] text-white dark:bg-[#2ae1ac] dark:text-gray-900"
+                ? "bg-[#2c5b2d] text-white dark:bg-lake-500 dark:text-gray-900"
                 : "bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
             } ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${
               clickedCategory === category.name &&

@@ -53,6 +53,19 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        lake: {
+          50: "#EBFEF5", //e6f9f2
+          100: "#CFFCE5", //ccf3e5
+          200: "#A3F7D3", //99e7cb
+          300: "#67EEB7", //66dbb1
+          400: "#2ae1ac",
+          500: "#06B97D", // Main lake color
+          600: "#05a471",
+          700: "#048f62",
+          800: "#037a54",
+          900: "#026545",
+          950: "#013023",
+        },
         lime: {
           50: "#f7fee7",
           100: "#ecfccb",
@@ -76,8 +89,8 @@ const config = {
           600: "#0047ff", // Main blue color from logo
           700: "#1d4ed8",
           800: "#1e40af",
-          900: "#1e3a8a",
-          950: "#172554",
+          900: "#07226f",
+          950: "#000057", //172554
         },
         gray: {
           50: "#f9fafb",

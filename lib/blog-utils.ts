@@ -55,8 +55,16 @@ export function getRelatedPosts(
     ...excludePosts.map((post) => post.id),
   ]);
 
-  // Filter out the current post and any excluded posts
-  const candidatePosts = allPosts.filter((post) => !excludeIds.has(post.id));
+  // Also track slugs to ensure we don't include the same content with different IDs
+  const excludeSlugs = new Set<string>([
+    currentPost.slug,
+    ...excludePosts.map((post) => post.slug),
+  ]);
+
+  // Filter out the current post and any excluded posts by both ID and slug
+  const candidatePosts = allPosts.filter(
+    (post) => !excludeIds.has(post.id) && !excludeSlugs.has(post.slug)
+  );
 
   if (candidatePosts.length === 0) return [];
 

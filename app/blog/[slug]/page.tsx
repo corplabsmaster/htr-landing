@@ -66,51 +66,63 @@ interface BlogPostPageProps {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const slug = params.slug;
-  const post = await getBlogPostBySlug(slug);
+  // Ensure params.slug is properly awaited and validated
+  const { slug } = params;
 
-  if (!post) {
+  try {
+    const post = await getBlogPostBySlug(slug);
+
+    if (!post) {
+      return {
+        title: "Post Not Found",
+        description: "The requested blog post could not be found.",
+      };
+    }
+
+    // Check if the banner image exists and is not empty
+    const hasBannerImage = post.bannerImage?.trim() !== "";
+
+    // Prepare base metadata
+    const baseTitle = post.seoTitle || post.title;
+    const baseDescription = post.metaDescription || post.excerpt;
+
     return {
-      title: "Post Not Found",
-      description: "The requested blog post could not be found.",
+      title: baseTitle,
+      description: baseDescription,
+      authors: post.authorName
+        ? [{ name: post.authorName, url: "/" }]
+        : undefined,
+      openGraph: {
+        title: baseTitle,
+        description: baseDescription,
+        type: "article",
+        publishedTime: post.published ?? undefined,
+        authors: post.authorName ? [post.authorName] : undefined,
+        ...(hasBannerImage && {
+          images: [
+            {
+              url: post.bannerImage,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ],
+        }),
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: baseTitle,
+        description: baseDescription,
+        ...(hasBannerImage && { images: [post.bannerImage] }),
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Blog Post",
+      description: "Loading blog post...",
     };
   }
-
-  // Check if the banner image exists and is not empty
-  const hasBannerImage = !!post.bannerImage && post.bannerImage.trim() !== "";
-
-  return {
-    title: post.seoTitle || post.title,
-    description: post.metaDescription || post.excerpt,
-    authors: post.authorName
-      ? [{ name: post.authorName, url: "/" }]
-      : undefined,
-    openGraph: {
-      title: post.seoTitle || post.title,
-      description: post.metaDescription || post.excerpt,
-      type: "article",
-      publishedTime: post.published ?? undefined,
-      authors: post.authorName ? [post.authorName] : undefined,
-      ...(hasBannerImage
-        ? {
-            images: [
-              {
-                url: post.bannerImage,
-                width: 1200,
-                height: 630,
-                alt: post.title,
-              },
-            ],
-          }
-        : {}),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.seoTitle || post.title,
-      description: post.metaDescription || post.excerpt,
-      ...(hasBannerImage ? { images: [post.bannerImage] } : {}),
-    },
-  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -201,7 +213,7 @@ async function BlogPostContent({ slug }: { slug: string }) {
             )}
 
             <h1
-              className="text-4xl font-bold tracking-tight text-[#2c5b2d] dark:text-[#2ae1ac] mb-4"
+              className="text-4xl font-bold tracking-tight text-[#2c5b2d] dark:text-lake-500 mb-4"
               itemProp="name"
             >
               {post.seoTitle || post.title}
@@ -230,7 +242,7 @@ async function BlogPostContent({ slug }: { slug: string }) {
                     </div>
                   ) : (
                     <div
-                      className="h-8 w-8 rounded-full bg-[#2c5b2d] dark:bg-[#2ae1ac] text-white dark:text-gray-900 flex items-center justify-center mr-2 relative group cursor-pointer"
+                      className="h-8 w-8 rounded-full bg-[#2c5b2d] dark:bg-lake-500 text-white dark:text-gray-900 flex items-center justify-center mr-2 relative group cursor-pointer"
                       title={post.authorRole || ""}
                     >
                       {post.authorName.charAt(0).toUpperCase()}
@@ -243,7 +255,7 @@ async function BlogPostContent({ slug }: { slug: string }) {
                   )}
                   <div className="flex items-center">
                     <span
-                      className="font-medium text-[#2c5b2d] dark:text-[#2ae1ac] relative group cursor-pointer"
+                      className="font-medium text-[#2c5b2d] dark:text-lake-500 relative group cursor-pointer"
                       title={post.authorRole || ""}
                     >
                       {post.authorName}
@@ -317,7 +329,7 @@ async function BlogPostContent({ slug }: { slug: string }) {
 
           {/* Post content */}
           <div
-            className="prose prose-lg dark:prose-invert prose-headings:text-[#2c5b2d] dark:prose-headings:text-[#2ae1ac] max-w-none"
+            className="prose prose-lg dark:prose-invert prose-headings:text-[#2c5b2d] dark:prose-headings:text-lake-500 max-w-none"
             itemProp="articleBody"
           >
             <NotionRenderer blocks={post.content} />
