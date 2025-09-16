@@ -6,11 +6,11 @@ import { Suspense } from "react";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Hiterra AI | Agritech Insights and Resources",
+  title: "HiTerra AI | Agritech Insights and Resources",
   description:
     "Latest insights, research, and updates about smart farming AI solutions and sustainable agriculture practices.",
   openGraph: {
-    title: "Hiterra AI | Agritech Insights and Resources",
+    title: "HiTerra AI | Agritech Insights and Resources",
     description:
       "Latest insights, research, and updates about smart farming AI solutions and sustainable agriculture practices.",
     type: "website",
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
         url: "/images/high-angle-farmland-view.jpg",
         width: 1200,
         height: 630,
-        alt: "Hiterra Agritech Insights",
+        alt: "HiTerra Agritech Insights",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hiterra AI | Agritech Insights",
+    title: "HiTerra AI | Agritech Insights",
     description:
       "Latest insights, research, and updates about smart farming AI solutions and sustainable agriculture practices.",
     images: ["/images/high-angle-farmland-view.jpg"],

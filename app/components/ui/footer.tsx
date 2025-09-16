@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaFacebook } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
 export function Footer() {
   const [mounted, setMounted] = useState(false);
@@ -14,7 +16,7 @@ export function Footer() {
 
   return (
     <footer className="border-t bg-white dark:bg-gray-900 dark:border-gray-800">
-      <div className="container flex flex-col gap-6 py-8 md:py-12 px-4 md:px-6">
+      <div className="container flex flex-col gap-6 py-8 md:py-12 px-10 md:px-6">
         <div className="grid grid-cols-12 gap-8">
           {/* Logo section - takes 3 columns */}
           <div className="col-span-12 md:col-span-3 space-y-3">
@@ -106,7 +108,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="https://corplabs-careers.notion.site/Careers-25a1f36a70cf80e0957fc2de434fb57e"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Careers
@@ -114,7 +116,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/blog?category=News"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Press
@@ -166,7 +168,12 @@ export function Footer() {
         <div className="flex flex-col gap-3 sm:flex-row justify-between items-center border-t pt-6 dark:border-gray-800">
           <p className="text-xs text-gray-500 dark:text-gray-400">
             © {new Date().getFullYear()}&nbsp;
-            <span className="dark:text-lake-500"> HiTerra</span> by
+            <span className="dark:text-lake-500">
+              {" "}
+              HiTerra
+              <span className="text-[10px] font-extralight font-mono">™</span>
+            </span>{" "}
+            <span className="text-[11px]"> by</span>
             <a
               className="text-purple-900 dark:text-purple-500"
               href="https://corplabs.co"
@@ -174,11 +181,11 @@ export function Footer() {
             >
               &nbsp;Corplabs
             </a>
-            . All Rights Reserved.
+            .&nbsp;&nbsp;All Rights Reserved.
           </p>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <Link
-              href="#"
+              href="/views/term/pp"
               className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
             >
               Privacy Policy
@@ -189,12 +196,26 @@ export function Footer() {
             >
               Terms of Service
             </Link>
-            <Link
-              href="#"
-              className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-            >
-              Cookie Policy
-            </Link>
+            <div className="flex items-center gap-3 ml-4 border-l pl-4 dark:border-gray-800">
+              <Link
+                href="https://www.facebook.com/hiterra.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                aria-label="Visit HiTerra Facebook page"
+              >
+                <FaFacebook size={16} />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/hiterra-co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                aria-label="Visit HiTerra LinkedIn page"
+              >
+                <FaLinkedin size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
