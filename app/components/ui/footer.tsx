@@ -53,23 +53,29 @@ export function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="#"
+                    // href="https://app.hiterra.co/app/access/?mode=login"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Mobile App
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    // href="https://app.hiterra.co/app/access/?mode=login"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Dashboard
+                    TerraLink
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     AI Data Platform
@@ -77,7 +83,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Marketplace
@@ -92,7 +98,8 @@ export function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="#"
+                    // href="/about"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     About
@@ -131,7 +138,8 @@ export function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="#"
+                    // href="/help-center"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Help Center
@@ -139,7 +147,8 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    // href="/contact"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Contact
@@ -147,7 +156,8 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    // href="/community"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Community
@@ -155,7 +165,8 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    // href="/status"
+                    href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Status
@@ -185,13 +196,13 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <Link
-              href="/views/term/pp"
+              href="/term/pp"
               className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
-              href="#"
+              href="/term/tnc"
               className="text-xs text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
             >
               Terms of Service

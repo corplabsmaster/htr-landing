@@ -1,0 +1,21 @@
+# https://hiterra.co robots.txt
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /product
+Allow: /blog
+Allow: /contact
+Allow: /community
+Allow: /help-center
+Allow: /status
+
+# Disallow pages that should not be indexed
+Disallow: /coming-soon
+Disallow: /term/pp
+Disallow: /term/tnc
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://hiterra.co/sitemap.xml

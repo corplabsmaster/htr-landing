@@ -14,7 +14,7 @@ const databaseId =
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email } = body;
+    const { email, page } = body;
 
     console.log("API received request:", { email });
     console.log("Environment variables:", {
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
           Inquiry: {
             multi_select: [
               {
-                name: "App Demo",
+                name: page === "coming-soon" ? "Page Coming Soon" : "App Demo",
               },
             ],
           },

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
-import { Footer } from "@/app/components/ui/footer";
 import { Input } from "@/app/components/ui/input";
 import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 import { useTheme } from "next-themes";
@@ -144,64 +143,6 @@ export default function HtrAppLanding() {
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-950">
-      <header className="border-b sticky top-0 z-10 bg-white dark:bg-gray-900 dark:border-gray-800">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <div className="flex items-center gap-2">
-            <Image
-              src={
-                mounted && theme === "dark"
-                  ? "/logos/htrr-logo-horizonta-negative.svg"
-                  : "/logos/htr-logo-horizonta-positive.svg"
-              }
-              alt="Terra Logo"
-              width={120}
-              height={24}
-              className="h-6 md:h-8 w-auto"
-            />
-          </div>
-          <nav className="hidden md:flex gap-6">
-            <Link
-              href="#problem"
-              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
-            >
-              Problem
-            </Link>
-            <Link
-              href="#solution"
-              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
-            >
-              Solution
-            </Link>
-            <Link
-              href="#why-us"
-              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
-            >
-              Why Us
-            </Link>
-            <Link
-              href="/blog"
-              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
-            >
-              Insights
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://app.hiterra.co/app/access/?mode=login"
-              className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors hidden md:block"
-            >
-              Log In
-            </Link>
-            <ThemeToggle />
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
-              onClick={handleButtonClick("Get Started")}
-            >
-              Get Started
-            </Button>
-          </div>
-        </div>
-      </header>
       <main className="flex-1">
         <section className="py-12 md:py-24 lg:py-32 bg-gradient-to-b from-lime-300 to-white dark:from-blue-900 dark:to-gray-950">
           <div className="container px-4 md:px-6">
@@ -220,8 +161,8 @@ export default function HtrAppLanding() {
                     be more profitable and sustainable
                   </h1>
                   <p className="max-w-[600px] text-gray-700 dark:text-gray-300 md:text-xl">
-                    The Hiterra Agro AI platform consists of the Hiterra app,
-                    the Hiterra Dashboard Web, and the Hiterra AI Data platform
+                    The HiTerra Agro AI platform consists of the HiTerra app,
+                    the HiTerra Dashboard Web, and the HiTerra AI Data platform
                   </p>
                 </div>
                 <div className="w-full max-w-sm space-y-2">
@@ -245,7 +186,7 @@ export default function HtrAppLanding() {
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Sign up to get notified when we launch.{" "}
                     <Link
-                      href="/terms"
+                      href="/term/tnc"
                       className="underline underline-offset-2"
                     >
                       Terms &amp; Conditions
@@ -308,8 +249,8 @@ export default function HtrAppLanding() {
             </div>
             <div className="mx-auto max-w-4xl">
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 mb-8">
-                Hiterra Argo addresses these challenges by providing an
-                AI-powered platform that delivers{" "}
+                HiTerra Argo addresses these challenges by providing an
+                AI-powered platform[TerraMind] that delivers{" "}
                 <span className="underline">smart farming recommendations</span>
                 ,{" "}
                 <span className="underline">
@@ -323,9 +264,9 @@ export default function HtrAppLanding() {
                 productivity.
               </p>
               <p className="text-xl md:text-2xl text-[#2c5b2d] dark:text-lake-400 font-bold">
-                By implementing Hiterra Agro System, farmer and agricultural
-                companies are able to reduce more than 85% labour and 70%
-                time-saving.
+                By implementing HiTerra TerraLink System, farmer and
+                agricultural companies are able to reduce more than 85% labour
+                and 70% time-saving.
               </p>
             </div>
           </div>
@@ -409,7 +350,6 @@ export default function HtrAppLanding() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import LayoutWrapper from "./layout-wrapper";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -33,8 +34,8 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
+          <LayoutWrapper>{children}</LayoutWrapper>
           <Toaster position="top-center" />
-          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Container from "@/app/components/ui/container";
 
 export const metadata: Metadata = {
   title: "Products - HiTerra AI",
@@ -8,9 +9,11 @@ export const metadata: Metadata = {
 
 export default function ProductPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold">Our Products</h1>
-      {/* Add your product page content here */}
-    </div>
+    <Container>
+      <div className="py-8">
+        <h1 className="text-4xl font-bold">Our Products</h1>
+        {/* Add your product page content here */}
+      </div>
+    </Container>
   );
 }
