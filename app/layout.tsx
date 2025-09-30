@@ -4,6 +4,7 @@ import { Manrope } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import LayoutWrapper from "./layout-wrapper";
+import { GoogleTagManager } from "./components/gtm";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -30,7 +31,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <GoogleTagManager />
+      </head>
       <body className={manrope.className}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-54RQSDWL"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
