@@ -107,14 +107,18 @@ export default function HtrAppLanding() {
   // Handle button clicks without affecting theme
   const handleButtonClick = (action: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    // Add your button action logic here
-    console.log(`${action} button clicked`);
+    if (action === "Connect") {
+      window.open(
+        "https://hiterra.notion.site/Connect-with-Hiterra-2771f36a70cf8028ad59d65aa31e17c3",
+        "_blank"
+      );
+    }
   };
 
   // Handle app download based on device type
   const handleDownloadApp = (e: React.MouseEvent) => {
     e.preventDefault();
-    const appUrl = "https://app.hiterra.co/app/access/?mode=login";
+    const appUrl = "https://hiterra.co/comming-soon";
 
     // Check if user is on mobile
     if (/Android|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
@@ -334,9 +338,9 @@ export default function HtrAppLanding() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
                 <Button
                   className="bg-white focus:text-blue-600 !text-blue-600 hover:text-white dark:!text-white dark:hover:!bg-blue-900 hover:bg-lake-400 dark:hover:!text-green-400 px-8 py-6 h-auto font-medium text-base"
-                  onClick={handleButtonClick("Start Free Trial")}
+                  onClick={handleButtonClick("Connect")}
                 >
-                  Start Free Trial
+                  Connect Us
                 </Button>
                 <Button
                   variant="outline"
