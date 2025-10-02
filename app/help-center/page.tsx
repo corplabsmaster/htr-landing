@@ -4,6 +4,15 @@ import Container from "@/app/components/ui/container";
 export const metadata: Metadata = {
   title: "Help Center",
   description: "Find help and support for our services",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export default function HelpCenterPage() {

@@ -8,15 +8,30 @@ const notion = new Client({
 
 // Notion database ID for newsletter signups - use a separate env var if available
 // Otherwise fallback to the hardcoded ID
-const databaseId =
-  process.env.NOTION_CONTACTS_DATABASE_ID || "1e71810104b580c686efceb3d4ac8bee";
+const databaseId = process.env.NOTION_CONTACTS_DATABASE_ID;
+
+if (!databaseId) {
+  throw new Error(
+    "NOTION_CONTACTS_DATABASE_ID environment variable is not set"
+  );
+}
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, page } = body;
+    const { email, contactNumber, note, inquiry } = body;
 
-    console.log("API received request:", { email });
+    // Ensure inquiry is an array
+    const inquiryArray = Array.isArray(inquiry)
+      ? inquiry
+      : [inquiry].filter(Boolean);
+
+    console.log("API received request:", {
+      email,
+      contactNumber,
+      note,
+      inquiry,
+    });
     console.log("Environment variables:", {
       apiKey: process.env.NOTION_API_KEY ? "Set (hidden)" : "Not set",
       databaseId,
@@ -74,9 +89,19 @@ export async function POST(request: Request) {
             ],
           },
           Inquiry: {
-            multi_select: [
+            multi_select: inquiryArray.map((item) => ({ name: item })),
+          },
+          "Contact Number": {
+            number: contactNumber
+              ? parseInt(contactNumber.replace(/\D/g, ""), 10) || null
+              : null,
+          },
+          Note: {
+            rich_text: [
               {
-                name: page === "coming-soon" ? "Page Coming Soon" : "App Demo",
+                text: {
+                  content: note || "",
+                },
               },
             ],
           },

@@ -69,12 +69,12 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Coming Soon Text */}
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-[#2c5b2d] dark:text-lake-400">
+        <h1 className="text-2xl md:text-5xl font-bold text-center mb-4 text-[#2c5b2d] dark:text-lake-400">
           Coming Soon
         </h1>
 
         {/* Description */}
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl">
+        <p className="text-sm md:text-xl text-gray-600 dark:text-gray-300 text-center px-4 mb-8 max-w-2xl">
           We&apos;re working hard to bring you something amazing. <br /> Stay
           tuned for updates!
         </p>
@@ -88,18 +88,21 @@ export default function ComingSoonPage() {
 
         {/* Email Signup Form */}
         <div className="mt-12 w-full max-w-md space-y-2">
-          <form className="flex gap-2" onSubmit={handleSignUp}>
+          <form
+            className="flex justify-center gap-2 pl-0 md:pl-8"
+            onSubmit={handleSignUp}
+          >
             <Input
               type="email"
               placeholder="Enter your email"
-              className="max-w-lg flex-1 dark:bg-gray-800 dark:border-gray-700"
+              className="flex items-center max-w-[200px] md:max-w-[320px] flex-1 dark:bg-gray-800 dark:border-gray-700"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <Button
               type="submit"
-              className="bg-[#2c5b2d] hover:bg-[#234724] text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+              className="bg-[#2c5b2d] hover:bg-[#234724] text-[12px] text-white dark:bg-blue-600 dark:hover:bg-blue-700"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Signing Up..." : "Sign Up"}

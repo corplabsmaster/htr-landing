@@ -118,7 +118,7 @@ export default function HtrAppLanding() {
   // Handle app download based on device type
   const handleDownloadApp = (e: React.MouseEvent) => {
     e.preventDefault();
-    const appUrl = "https://hiterra.co/comming-soon";
+    const appUrl = "https://hiterra.co/coming-soon";
 
     // Check if user is on mobile
     if (/Android|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {

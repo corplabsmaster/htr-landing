@@ -69,9 +69,11 @@ export function Header() {
             Log In
           </Link>
           <ThemeToggle />
-          <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
-            Get Started
-          </Button>
+          <Link href="/coming-soon">
+            <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

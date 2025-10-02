@@ -121,12 +121,20 @@ export function Footer() {
                     Careers
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/blog?category=News"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Press
+                  </Link>
+                </li> */}
+                <li>
+                  <Link
+                    href="/investor"
+                    className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Investor
                   </Link>
                 </li>
               </ul>
@@ -147,8 +155,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    // href="/contact"
-                    href="/coming-soon"
+                    href="/contact"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Contact
