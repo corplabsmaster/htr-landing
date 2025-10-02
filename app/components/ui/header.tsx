@@ -39,13 +39,13 @@ export function Header() {
             href="/#problem"
             className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
           >
-            Problem
+            Solution
           </Link>
           <Link
-            href="/#solution"
+            href="/product"
             className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
           >
-            Solution
+            Impact
           </Link>
           <Link
             href="/#why-us"
