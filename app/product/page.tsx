@@ -1,19 +1,12 @@
 import { Metadata } from "next";
-import Container from "@/app/components/ui/container";
+import { ProductContent } from "./product-content";
 
 export const metadata: Metadata = {
-  title: "Products - HiTerra AI",
+  title: "HiTerra AI App",
   description:
-    "Explore our smart farming AI solutions and products for modern agriculture.",
+    "Help farmers and agricultural companies to be more profitable and sustainable, optimize harvests and higher yields with HiTerra App",
 };
 
 export default function ProductPage() {
-  return (
-    <Container>
-      <div className="py-8">
-        <h1 className="text-4xl font-bold">Our Products</h1>
-        {/* Add your product page content here */}
-      </div>
-    </Container>
-  );
+  return <ProductContent />;
 }

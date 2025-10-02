@@ -78,7 +78,10 @@ export default function HtrAppLanding() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          inquiry: ["App Demo_home"],
+        }),
       });
 
       console.log("Response status:", response.status);
@@ -86,7 +89,7 @@ export default function HtrAppLanding() {
       console.log("Response data:", data);
 
       if (response.ok) {
-        toast.success("Thank you! We'll be in touch about our app demo.");
+        toast.success("Thank you! We'll be in touch about our app updates.");
         setEmail("");
       } else {
         toast.error(

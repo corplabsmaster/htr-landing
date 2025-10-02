@@ -54,10 +54,9 @@ export function Footer() {
                 <li>
                   <Link
                     // href="https://app.hiterra.co/app/access/?mode=login"
-                    href="/coming-soon"
+                    href="/product"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    // rel="noopener noreferrer"
                   >
                     Mobile App
                   </Link>
@@ -65,17 +64,16 @@ export function Footer() {
                 <li>
                   <Link
                     // href="https://app.hiterra.co/app/access/?mode=login"
-                    href="/coming-soon"
+                    href="/product"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    // rel="noopener noreferrer"
                   >
                     TerraLink
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/coming-soon"
+                    href="/product"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     AI Data Platform

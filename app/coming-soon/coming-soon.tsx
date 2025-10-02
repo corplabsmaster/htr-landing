@@ -27,7 +27,10 @@ export default function ComingSoonPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, page: "coming-soon" }),
+        body: JSON.stringify({
+          email,
+          inquiry: ["From_Coming_Soon"],
+        }),
       });
 
       const data = await response.json();

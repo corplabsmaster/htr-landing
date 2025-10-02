@@ -1,6 +1,8 @@
 # https://hiterra.co robots.txt
 
 User-agent: *
+
+# Main Pages
 Allow: /
 Allow: /about
 Allow: /product
@@ -16,6 +18,9 @@ Disallow: /term/pp
 Disallow: /term/tnc
 Disallow: /admin/
 Disallow: /api/
+Disallow: /notion-test
+Disallow: /notion-sync
+Disallow: /investor
 
 # Sitemap
 Sitemap: https://hiterra.co/sitemap.xml
