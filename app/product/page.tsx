@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { ProductContent } from "./product-content";
 
 export const metadata: Metadata = {
-  title: "HiTerra AI App",
+  title: "HiTerra - TerraCore AI",
   description:
-    "Help farmers and agricultural companies to be more profitable and sustainable, optimize harvests and higher yields with HiTerra App",
+    "Help farmers and agricultural companies optimize harvests and higher yields with HiTerra AI: TerraCore",
 };
 
 export default function ProductPage() {

@@ -112,8 +112,8 @@ export default function HtrAppLanding() {
     e.preventDefault();
     if (action === "Connect") {
       window.open(
-        "https://hiterra.notion.site/Connect-with-Hiterra-2771f36a70cf8028ad59d65aa31e17c3",
-        "_blank"
+        "https://hiterra.notion.site/Connect-with-Hiterra-2771f36a70cf8028ad59d65aa31e17c3"
+        // "_blank"
       );
     }
   };

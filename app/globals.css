@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Times New Roman";
+  src: local("Times New Roman");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Times New Roman";
+  src: local("Times New Roman Bold");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Times New Roman";
+  src: local("Times New Roman Italic");
+  font-weight: normal;
+  font-style: italic;
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   font-weight: 300;
@@ -12,10 +33,40 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+.font-times {
+  font-family: "Times New Roman", Times, serif;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }
 
 /* Loading animation */

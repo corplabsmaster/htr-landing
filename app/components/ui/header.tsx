@@ -48,16 +48,16 @@ export function Header() {
             Impact
           </Link>
           <Link
-            href="/#why-us"
-            className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
-          >
-            Why Us
-          </Link>
-          <Link
             href="/blog"
             className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
           >
             Insights
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors"
+          >
+            Grow with Us
           </Link>
         </nav>
         <div className="flex items-center gap-4">
@@ -69,9 +69,9 @@ export function Header() {
             Log In
           </Link>
           <ThemeToggle />
-          <Link href="/coming-soon">
-            <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
-              Get Started
+          <Link href="/product">
+            <Button className="text-sm bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
+              Discover Impact
             </Button>
           </Link>
         </div>

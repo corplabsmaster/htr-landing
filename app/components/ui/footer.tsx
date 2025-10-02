@@ -38,7 +38,7 @@ export function Footer() {
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Smart farming AI solutions for modern agriculture. Streamline
-              operations and increase yields.
+              operations and optimize harvests.
             </p>
           </div>
 
@@ -96,8 +96,8 @@ export function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    // href="/about"
-                    href="/coming-soon"
+                    href="/about"
+                    // href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     About
@@ -144,8 +144,8 @@ export function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    // href="/help-center"
-                    href="/coming-soon"
+                    href="/help-center"
+                    // href="/coming-soon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
                     Help Center
