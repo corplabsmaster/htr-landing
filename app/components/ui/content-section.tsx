@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 export interface ContentSectionProps {
   headline: string;
@@ -13,6 +13,7 @@ export interface ContentSectionProps {
   imageClassName?: string;
   sectionClassName?: string;
   isFeatureSection?: boolean;
+  imageAlt?: string;
 }
 
 export function ContentSection({
@@ -25,6 +26,7 @@ export function ContentSection({
   imageClassName = "",
   sectionClassName = "",
   isFeatureSection = false,
+  imageAlt = "",
 }: ContentSectionProps) {
   // When imageLeft is true, leftContent should be the image and rightContent should be the text
   // When imageLeft is false, leftContent should be the text and rightContent should be the image
@@ -32,14 +34,46 @@ export function ContentSection({
     ? [rightContent, leftContent] // imageLeft: true - text on right, image on left
     : [leftContent, rightContent]; // imageLeft: false - text on left, image on right
 
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const TextComponent = (
-    <div className="flex flex-col justify-center space-y-1 md:space-y-4">
+    <div
+      className={`flex flex-col justify-center space-y-1 md:space-y-4 transition-all duration-1000 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
       <h2
         className={`text-xl md:text-3xl font-bold whitespace-pre-line ${headlineClassName}`}
         dangerouslySetInnerHTML={{ __html: headline }}
       />
       <p
-        className={`text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed ${textClassName}`}
+        className={`text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed text-pretty ${textClassName}`}
       >
         {typeof textContent === "string" ? textContent : textContent}
       </p>
@@ -49,7 +83,9 @@ export function ContentSection({
   const ImageComponent =
     typeof imageContent === "string" ? (
       <div
-        className={`relative ${
+        className={`relative transition-all duration-1000 ease-out ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
+        } ${
           isFeatureSection
             ? "h-[600px] md:max-h-[700px] w-auto mask-feature-container"
             : "h-[300px] md:h-[400px] w-full"
@@ -67,7 +103,7 @@ export function ContentSection({
       >
         <Image
           src={imageContent}
-          alt={headline}
+          alt={imageAlt || headline}
           fill
           className={`object-contain ${
             isFeatureSection ? "object-top" : "object-cover"
@@ -80,7 +116,7 @@ export function ContentSection({
     );
 
   return (
-    <div className={`py-4 md:py-16 px-2 ${sectionClassName}`}>
+    <div ref={sectionRef} className={`py-4 md:py-16 px-2 ${sectionClassName}`}>
       {/* Mobile: Always Text above Image */}
       <div className="block md:hidden">
         <div className="flex flex-col gap-4">

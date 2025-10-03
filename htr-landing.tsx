@@ -286,41 +286,68 @@ export default function HtrAppLanding() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-[#2c5b2d] dark:text-lake-400">
-                Why Choose Us
+                Our Terra-Magic
               </h2>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">Expert Team</h3>
-                <p>
-                  Our skilled team brings specialized knowledge and experience
-                  to provide top-notch solutions tailored to our clients' needs.
-                </p>
+              {/* AI Recommendation - Green gradient */}
+              <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-green-500/20 via-green-400/20 to-emerald-300/20 p-6 backdrop-blur-xl backdrop-filter hover:shadow-lg transition-all duration-300 dark:from-green-900/30 dark:via-green-800/30 dark:to-emerald-700/30 dark:border-green-800/50 border-green-100">
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 text-green-800 dark:text-green-300">
+                    AI Recommendation
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-200 text-pretty">
+                    Get actionable insights powered by AI to optimize farm
+                    practices, improve yield, and reduce costs with data-driven
+                    guidance
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent"></div>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">
-                  Cutting-Edge Technology
-                </h3>
-                <p>
-                  We use the latest tools and AI technology to stay ahead,
-                  ensuring efficient and effective services.
-                </p>
+
+              {/* TerraLink - Blue gradient */}
+              <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-blue-500/20 via-blue-400/20 to-cyan-300/20 p-6 backdrop-blur-xl backdrop-filter hover:shadow-lg transition-all duration-300 dark:from-blue-900/30 dark:via-blue-800/30 dark:to-cyan-700/30 dark:border-blue-800/50 border-blue-100">
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 text-blue-800 dark:text-blue-300">
+                    TerraLink
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-200 text-pretty">
+                    Connect every aspect of your operations through TerraLink,
+                    an ecosystem that integrates product providers,farmers,and
+                    service providers
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent"></div>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">Customer Focus</h3>
-                <p>
-                  We prioritize building strong relationships and understanding
-                  our clients' needs, leading to long-term partnerships based on
-                  trust and satisfaction.
-                </p>
+
+              {/* Proven Reports - Purple gradient */}
+              <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-purple-500/20 via-purple-400/20 to-fuchsia-300/20 p-6 backdrop-blur-xl backdrop-filter hover:shadow-lg transition-all duration-300 dark:from-purple-900/30 dark:via-purple-800/30 dark:to-fuchsia-700/30 dark:border-purple-800/50 border-purple-100">
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 text-purple-800 dark:text-purple-300">
+                    Proven Reports
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-200 text-pretty">
+                    Backed by lab tests and research-driven reports that measure
+                    performance, validate results, and guide smarter farming
+                    decisions
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent"></div>
               </div>
-              <div className="bg-[#2c5b2d] dark:bg-blue-900 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4">Proven Success</h3>
-                <p>
-                  With a track record of successful projects, we've earned a
-                  reputation for reliability and excellence, setting us apart
-                  from the competition.
-                </p>
+
+              {/* Carbon Compliance - Teal gradient */}
+              <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-teal-500/20 via-teal-400/20 to-cyan-300/20 p-6 backdrop-blur-xl backdrop-filter hover:shadow-lg transition-all duration-300 dark:from-teal-900/30 dark:via-teal-800/30 dark:to-cyan-700/30 dark:border-teal-800/50 border-teal-100">
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 text-teal-800 dark:text-teal-300">
+                    Carbon Compliance
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-200 text-pretty">
+                    Ensure your farm aligns with global carbon credit and
+                    sustainability standards, unlocking new opportunities and
+                    long-term value
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent"></div>
               </div>
             </div>
           </div>

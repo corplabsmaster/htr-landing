@@ -28,7 +28,7 @@ export default function HelpCenterPage() {
       <div className="py-12 md:py-16">
         <div className="grid md:grid-cols-2 gap-12 md:gap-12">
           {/* Left Block - Headline */}
-          <div className="flex flex-col justify-start space-y-2 px-2">
+          <div className="flex flex-col justify-start space-y-2 px-2 lg:sticky lg:top-8">
             <h1 className="text-2xl md:text-4xl font-semibold md:font-medium">
               Help Center
             </h1>

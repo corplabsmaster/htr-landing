@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "@/app/components/ui/container";
 import { ContentSection } from "@/app/components/ui/content-section";
 import { Tab } from "@/app/components/ui/tab";
@@ -15,6 +15,7 @@ export function ProductContent() {
         headline="🌱 For Beginners"
         leftContent="Starting out in farming is easier with step-by-step AI recommendations, practical tips, and a supportive community. Beginners can optimize harvest from day one, gaining confidence as they learn and grow."
         rightContent="/images/product/beginner_farmer.webp"
+        imageAlt="Beginner farmer using HiTerra app to learn farming practices"
         imageLeft={false}
       />
 
@@ -23,6 +24,7 @@ export function ProductContent() {
         headline="🌾 For Farmers"
         leftContent="/images/product/farmer_working.webp"
         rightContent="Practical, easy-to-use tools make daily farming more efficient. The mobile app helps manage schedules, sends task notifications, and delivers AI recommendations tailored to specific crops. Soil testing identifies the best crops for each plot, while access to a marketplace and community forum reduces costs, increases yields, and supports smarter farming."
+        imageAlt="Experienced farmer working in the field with HiTerra technology"
         imageLeft={true}
       />
 
@@ -59,6 +61,7 @@ export function ProductContent() {
         headline="Keep All Your Land Data in <span class='text-blue-700 dark:text-blue-500'>One</span>"
         leftContent="/images/product/screen/home.png"
         rightContent="Unify every detail of your farm into one digital platform. From soil health to crop cycles, all land data stays connected in a single system, making it easier to analyze, plan, and optimize harvests."
+        imageAlt="HiTerra app dashboard showing unified land data management interface"
         imageLeft={true}
         imageClassName="object-contain"
         isFeatureSection={true}
@@ -71,6 +74,7 @@ export function ProductContent() {
         }
         leftContent="TerraMind's AI goes beyond reminders — it recommends the right tasks at the right time based on soil data, weather, and crop cycles. Farmers and enterprises gain actionable insights that improve planning, reduce wasted effort, and optimize harvest results."
         rightContent="/images/product/screen/create-cycle.png"
+        imageAlt="TerraMind AI task recommendation interface showing smart farming suggestions"
         headlineClassName="whitespace-pre-line"
         imageLeft={false}
         imageClassName="object-contain"
@@ -82,6 +86,7 @@ export function ProductContent() {
         headline="Create and Assign Different <span class='text-blue-700 dark:text-blue-500'>Tasks</span> to Worker under Cycles"
         leftContent="/images/product/screen/task-assign.png"
         rightContent="Digitise task management by assigning responsibilities directly within seasonal or crop cycles. This connected ecosystem ensures accountability and helps teams work smarter across the farm."
+        imageAlt="Task assignment interface showing worker management and cycle planning"
         imageLeft={true}
         imageClassName="object-contain"
         isFeatureSection={true}
@@ -94,6 +99,7 @@ export function ProductContent() {
         }
         leftContent="Find trusted farming solutions within the TerraLink ecosystem. From fertilizers to biostimulants, discover products tested in the field and proven to optimize harvest results."
         rightContent="/images/product/screen/explore-marketplace.png"
+        imageAlt="HiTerra marketplace interface showcasing agricultural products and solutions"
         imageLeft={false}
         imageClassName="object-contain"
         isFeatureSection={true}
@@ -107,6 +113,7 @@ export function ProductContent() {
         headlineClassName="whitespace-pre-line"
         leftContent="/images/product/screen/list-product-service.png"
         rightContent="Showcase your agricultural solutions inside TerraLink. Providers can integrate their services and products into a thriving ecosystem, connecting with farmers and contributing to the future of digital farming."
+        imageAlt="Service provider interface for listing agricultural products and services in TerraLink"
         imageLeft={true}
         imageClassName="object-contain"
         isFeatureSection={true}

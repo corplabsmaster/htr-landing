@@ -28,11 +28,11 @@
     <priority>0.7</priority>
     <lastmod>2024-03-14</lastmod>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://hiterra.co/investor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
+  </url> -->
   <url>
     <loc>https://hiterra.co/community</loc>
     <changefreq>weekly</changefreq>
