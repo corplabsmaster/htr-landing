@@ -565,7 +565,7 @@ export default function InvestorPage() {
                     <Linkedin className="w-5 h-5" />
                     LinkedIn
                   </Link>
-                  <div className="relative w-auto h-28 mt-1 mx-auto">
+                  <div className="relative w-auto h-28 mt-1 mx-auto invert-0 dark:invert-[93.4%]">
                     <Image
                       src="/images/team/dayrl-1.png"
                       alt="Previous Company"
@@ -602,7 +602,7 @@ export default function InvestorPage() {
                     <Linkedin className="w-5 h-5" />
                     LinkedIn
                   </Link>
-                  <div className="relative w-auto h-28 mt-1 mx-auto">
+                  <div className="relative w-auto h-28 mt-1 mx-auto invert-0 dark:invert-[93.4%]">
                     <Image
                       src="/images/team/ken-1.png"
                       alt="Previous Company"
@@ -634,7 +634,7 @@ export default function InvestorPage() {
                     <br />
                     10 Years of Agriculture Experience
                   </p>
-                  <div className="relative w-auto h-24 mt-1 mx-auto">
+                  <div className="relative w-auto h-24 mt-1 mx-auto invert-0 dark:invert-[93.4%]">
                     <Image
                       src="/images/team/bfs-3.png"
                       alt="Previous Company"
@@ -664,12 +664,12 @@ export default function InvestorPage() {
                     <br />
                     10 Years of Agriculture Experience
                   </p>
-                  <div className="relative w-auto h-24 mt-1 mx-auto">
+                  <div className="relative w-auto h-24 mt-1 mx-auto invert-0 dark:invert-[93.4%]">
                     <Image
                       src="/images/team/bfs-3.png"
                       alt="Previous Company"
                       fill
-                      className="object-contain dark:invert-50"
+                      className="object-contain"
                     />
                   </div>
                 </div>
@@ -696,7 +696,7 @@ export default function InvestorPage() {
               <li className="flex items-start gap-3">
                 <span className="text-green-600 text-xmd flex-shrink-0">✓</span>
                 <span className="text-sm md:text-lg text-gray-700 dark:text-gray-200">
-                  Nestlé's 2,000-acre rice project in Malaysimd
+                  Nestlé's 2,000-acre rice project in Malaysia
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -708,8 +708,8 @@ export default function InvestorPage() {
               <li className="flex items-start gap-3">
                 <span className="text-green-600 text-md flex-shrink-0">✓</span>
                 <span className="text-sm md:text-lg text-gray-700 dark:text-gray-200">
-                  10,000 acres of rice project in Kedah with Thean Peng Rice &
-                  Oil
+                  10,000 acres of rice project with Thean Peng Rice & Oil in
+                  Kedah, Malaysia
                 </span>
               </li>
             </ul>
