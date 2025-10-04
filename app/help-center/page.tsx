@@ -47,8 +47,7 @@ export default function HelpCenterPage() {
                 <h2 className="text-lg md:text-xl font-semibold border-b border-gray-200 dark:border-gray-700 pb-2 text-left">
                   General Questions
                 </h2>
-
-                <AccordionItem value="item-1" className="text-left">
+                <AccordionItem value="item-0" className="text-left">
                   <AccordionTrigger className="text-left">
                     What is HiTerra?
                   </AccordionTrigger>
@@ -60,9 +59,18 @@ export default function HelpCenterPage() {
                     operations and optimize yields.
                   </AccordionContent>
                 </AccordionItem>
-
-                <AccordionItem value="item-2" className="text-left">
+                <AccordionItem value="item-1" className="text-left">
                   <AccordionTrigger className="text-left">
+                    What is Carbon Credit?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    A carbon credit is a tradable certificate that represents
+                    the reduction or removal of one metric ton of carbon dioxide
+                    equivalent, used to offset emissions.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2" className="text-left">
+                  <AccordionTrigger className="text-left text-pretty">
                     How does the HiTerra App help farmers?
                   </AccordionTrigger>
                   <AccordionContent>
@@ -72,9 +80,8 @@ export default function HelpCenterPage() {
                     farmer into carbon credit projects to offset their cost.
                   </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="item-3" className="text-left">
-                  <AccordionTrigger className="text-left">
+                  <AccordionTrigger className="text-left text-pretty">
                     The Benefits of joining carbon credit projects
                   </AccordionTrigger>
                   <AccordionContent>
@@ -84,10 +91,9 @@ export default function HelpCenterPage() {
                     products and services from HiTerra.
                   </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="item-4" className="text-left">
-                  <AccordionTrigger className="text-left">
-                    The criteria to be entitled to join carbon credit projects?
+                  <AccordionTrigger className="text-left text-pretty">
+                    Criteria to be entitled to a carbon credit project?
                   </AccordionTrigger>
                   <AccordionContent>
                     Minimum 200 hectares of agricultural land, proof of land
@@ -96,9 +102,8 @@ export default function HelpCenterPage() {
                     industrialization.
                   </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="item-5" className="text-left">
-                  <AccordionTrigger className="text-left">
+                  <AccordionTrigger className="text-left text-pretty">
                     How does the HiTerra App help enterprises?
                   </AccordionTrigger>
                   <AccordionContent>
@@ -111,7 +116,6 @@ export default function HelpCenterPage() {
                     Verification) records and involved in validations process.
                   </AccordionContent>
                 </AccordionItem>
-
                 <AccordionItem value="item-6" className="text-left">
                   <AccordionTrigger className="text-left">
                     Who do I contact if I have questions?
@@ -139,14 +143,28 @@ export default function HelpCenterPage() {
                 </h2>
 
                 <AccordionItem value="item-7" className="text-left">
-                  <AccordionTrigger className="text-left">
+                  <AccordionTrigger className="text-left text-pretty">
                     What features does the HiTerra App offer?
                   </AccordionTrigger>
-                  <AccordionContent>
-                    The HiTerra Marketplace is a seamless platform designed to
-                    connect farmers with high-quality agricultural products,
-                    service providers and common practice from local suppliers
-                    and sellers.
+                  <AccordionContent className="text-pretty">
+                    <p>Our current core features included:</p>
+                    <br />
+                    <p>
+                      &bull; TerraMind AI task recommendation, an automated
+                      farming cycle intelligence
+                    </p>
+                    <br />
+                    <p>
+                      &bull; TerraLink network, a seamless platform designed to
+                      connect farmers with high-quality agricultural products,
+                      service providers and common practice from local suppliers
+                      and sellers.
+                    </p>
+                    <br />
+                    <p>
+                      &bull; TerraMart, a marketplace for products and services.
+                    </p>
+                    <br />
                   </AccordionContent>
                 </AccordionItem>
 
