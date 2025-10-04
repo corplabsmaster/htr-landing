@@ -619,7 +619,7 @@ export default function InvestorPage() {
               <div className="flex flex-col items-center text-center gap-4">
                 <div className="relative w-32 h-32 rounded-full overflow-hidden">
                   <Image
-                    src="/images/team/bfs-1.webp"
+                    src="/images/team/bfs-2.webp"
                     alt="Charles Yap - Agri-Innovation Advisor"
                     fill
                     className="object-cover"
@@ -651,7 +651,7 @@ export default function InvestorPage() {
               <div className="flex flex-col items-center text-center gap-4">
                 <div className="relative w-32 h-32 rounded-full overflow-hidden">
                   <Image
-                    src="/images/team/bfs-2.webp"
+                    src="/images/team/bfs-1.webp"
                     alt="KC Lim - Agribusiness Advisor"
                     fill
                     className="object-cover"
@@ -669,7 +669,7 @@ export default function InvestorPage() {
                       src="/images/team/bfs-3.png"
                       alt="Previous Company"
                       fill
-                      className="object-contain"
+                      className="object-contain dark:invert-50"
                     />
                   </div>
                 </div>
