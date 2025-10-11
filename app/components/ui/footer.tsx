@@ -81,10 +81,10 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/coming-soon"
+                    href="/coming-soon/terracarbon"
                     className="text-sm text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
                   >
-                    Carbon Accounting Platform
+                    TerraCarbon - Accounting
                   </Link>
                 </li>
                 <li>
